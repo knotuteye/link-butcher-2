@@ -5,6 +5,9 @@
         <div class="wrapper">
           <Branding name="pbid.io" subtitle="Link Shortener"></Branding>
           <URLInput />
+          <RecentLinksBox>
+            <RecentLink short="x34asd4e" original='facebook.com/assets/img/sdf'></RecentLink>
+          </RecentLinksBox>
         </div>
       </ColorOverlay>
     </ImageBackground>
@@ -17,12 +20,17 @@ import ImageBackground from './components/ImageBackground.vue'
 import ColorOverlay from './components/ColorOverlay.vue'
 import Branding from './components/Branding.vue'
 import URLInput from './components/URLInput.vue'
+import RecentLinksBox from './components/RecentLinksBox.vue'
+import RecentLink from './components/RecentLink.vue'
+
 @Component({
   components: {
     ImageBackground,
     ColorOverlay,
     Branding,
-    URLInput
+    URLInput,
+    RecentLinksBox,
+    RecentLink
   }
 })
 export default class App extends Vue {}
@@ -49,5 +57,13 @@ export default class App extends Vue {}
 .brand {
   margin-top: -10rem;
   margin-bottom: 5rem;
+}
+
+.url-input {
+  margin-bottom: 5rem;
+}
+
+.recent {
+  /* align-self: flex-start; */
 }
 </style>
