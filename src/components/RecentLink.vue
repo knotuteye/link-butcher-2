@@ -22,7 +22,13 @@ export default class RecentLink extends Vue {
 a {
   text-decoration: none;
   color: #ffffff;
+  font-family: 'Roboto', sans-serif;
 }
+
+a.short {
+  font-size: 1.2em;
+}
+
 .recent-link {
   padding: 1em 2rem;
   border: 0.5px solid #ffffff4f;

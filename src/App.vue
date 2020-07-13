@@ -70,7 +70,8 @@ export default class App extends Vue {
   max-width: 40rem;
   margin-top: 25vh;
   z-index: 2;
-  padding: 2rem;
+  padding-bottom: 2rem;
+  box-sizing: border-box;
 }
 
 .brand {

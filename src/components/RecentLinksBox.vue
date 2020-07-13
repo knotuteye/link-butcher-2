@@ -15,7 +15,7 @@ export default class ImageBackground extends Vue {}
 <style scoped>
 h3 {
   color: #ffffffd2;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
   font-size: 0.9rem;

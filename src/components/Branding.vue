@@ -18,7 +18,7 @@ export default class Branding extends Vue {
 <style scoped>
 h1.masthead {
   color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 4em;
   text-shadow: 1px 5px 10px #200053a2;

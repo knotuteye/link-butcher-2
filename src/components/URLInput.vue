@@ -19,6 +19,7 @@ form {
 input {
   padding: 12px;
   font-size: 1.2em;
+  font-family: 'Roboto', sans-serif;
   border: 0;
 }
 
