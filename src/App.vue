@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <ImageBackground>
-      <ColorOverlay>HE</ColorOverlay>
+      <ColorOverlay>
+        <Branding name="pbid.io" subtitle="Link Shortener"></Branding>
+      </ColorOverlay>
     </ImageBackground>
   </div>
 </template>
@@ -10,10 +12,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import ImageBackground from './components/ImageBackground.vue'
 import ColorOverlay from './components/ColorOverlay.vue'
+import Branding from './components/Branding.vue'
 @Component({
   components: {
     ImageBackground,
-    ColorOverlay
+    ColorOverlay,
+    Branding
   }
 })
 export default class App extends Vue {}
