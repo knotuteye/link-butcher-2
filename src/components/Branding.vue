@@ -20,12 +20,13 @@ h1.masthead {
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
-  font-size: 2em;
+  font-size: 4em;
+  text-shadow: 1px 1px 10px #ffffff8c;
+  letter-spacing: 4px;
   text-transform: lowercase;
 }
 
 div.brand {
-  border: 2px solid #ffffff69;
   width: max-content;
   padding: 1rem 2rem;
 }
