@@ -44,10 +44,10 @@ export default class App extends Vue {}
   flex: 1;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .brand {
+  margin-top: -10rem;
   margin-bottom: 5rem;
 }
 </style>

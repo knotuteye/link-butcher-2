@@ -15,6 +15,6 @@ export default class ColorOverlay extends Vue {}
 div.overlay {
   min-height: 100vh;
   width: 100vw;
-  background-color: #6f16ffaa;
+  background-color: #6f16ffa2;
 }
 </style>
