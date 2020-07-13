@@ -1,4 +1,4 @@
-# url-shortener
+# pbid.io
 
 ## Project setup
 ```

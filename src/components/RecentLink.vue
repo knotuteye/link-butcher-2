@@ -4,7 +4,7 @@
       <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
       <a class="original" :href="original">{{ original }}</a>
     </div>
-    <i title="Copy" class="fa fa-copy"></i>
+    <i @click="copyToClipboard" title="Copy" class="fa fa-copy"></i>
   </div>
 </template>
 
@@ -15,6 +15,15 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 export default class RecentLink extends Vue {
   @Prop() private short!: string
   @Prop() private original!: string
+  copyToClipboard(): void {
+    const el = document.createElement('textarea')
+    el.value = `pbid.io/${this.short}`
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand('copy')
+    document.body.removeChild(el)
+    alert('Copied!')
+  }
 }
 </script>
 
