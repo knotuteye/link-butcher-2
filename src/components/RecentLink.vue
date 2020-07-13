@@ -1,10 +1,10 @@
 <template>
   <div class="recent-link">
     <div>
-      <a class="short" :href="short">{{ short }}</a>
+      <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
       <a class="original" :href="original">{{ original }}</a>
     </div>
-    <i class="fa fa-copy"></i>
+    <i title="Copy" class="fa fa-copy"></i>
   </div>
 </template>
 
@@ -42,16 +42,25 @@ a {
 }
 
 .recent-link:nth-of-type(2n + 1) {
-  background-color: #ffffff62;
+  background-color: #ffffff1c;
+}
+:last-of-type .recent-link > div {
+  display: grid;
 }
 
-.recent-link > div {
-  display: grid;
+.recent-link > div > a:last-of-type {
+  color: #ffffffb4;
+  margin-top: 10px;
 }
 
 i {
   cursor: pointer;
   align-self: center;
   font-size: 1.5em;
+  color: #ffffffa9;
+}
+
+i:hover {
+  color: #ffffff;
 }
 </style>

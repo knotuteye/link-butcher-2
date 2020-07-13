@@ -57,16 +57,23 @@ export default class App extends Vue {}
   outline: none;
 }
 
+#overlay > canvas {
+  position: fixed;
+  z-index: 1;
+}
+
 .overlay {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .wrapper {
   height: max-content;
   width: 80%;
   max-width: 40rem;
+  margin-top: 25vh;
+  z-index: 2;
+  padding: 2rem;
 }
 
 .brand {
@@ -75,5 +82,6 @@ export default class App extends Vue {}
 
 .url-input {
   margin-bottom: 5rem;
+  width: 100%;
 }
 </style>

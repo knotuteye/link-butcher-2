@@ -18,5 +18,7 @@ h3 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
   text-transform: uppercase;
+  font-size: 0.9rem;
+  margin: 10px;
 }
 </style>

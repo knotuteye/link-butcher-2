@@ -24,6 +24,6 @@ h1.masthead {
   text-shadow: 1px 5px 10px #200053a2;
   letter-spacing: 4px;
   text-transform: lowercase;
+  text-align: center;
 }
-
 </style>

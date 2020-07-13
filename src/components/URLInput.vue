@@ -14,7 +14,7 @@ export default class URLInput extends Vue {}
 
 <style scoped>
 form {
- 
+  display: flex;
 }
 input {
   padding: 12px;
@@ -31,7 +31,9 @@ input:-webkit-autofill:focus {
 input[type='url'] {
   color: #ffffff;
   background-color: transparent;
-  border-bottom: 2px solid #ffffff67;
+  border: 2px solid #ffffff67;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   flex: 1;
 }
 input[type='url']::placeholder {
@@ -41,7 +43,7 @@ input[type='url']::placeholder {
 input[type='submit'] {
   background-color: #ffffff69;
   color: #ffffff;
-  padding: 14px;
+  padding: 14px 2rem;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   cursor: pointer;
