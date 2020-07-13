@@ -7,21 +7,12 @@
           <URLInput />
           <RecentLinksBox>
             <RecentLink
-              short="x34asd4e"
-              original="facebook.com/assets/img/sdf"
-            ></RecentLink
-            ><RecentLink
-              short="x34asd4e"
-              original="facebook.com/assets/img/sdf"
-            ></RecentLink
-            ><RecentLink
-              short="x34asd4e"
-              original="facebook.com/assets/img/sdf"
-            ></RecentLink
-            ><RecentLink
-              short="x34asd4e"
-              original="facebook.com/assets/img/sdf"
-            ></RecentLink>
+              v-for="obj in recentLinks"
+              :key="obj.short"
+              :short="obj.short"
+              :original="obj.original"
+            >
+            </RecentLink>
           </RecentLinksBox>
         </div>
       </ColorOverlay>
@@ -48,7 +39,13 @@ import RecentLink from './components/RecentLink.vue'
     RecentLink
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private recentLinks: Array<Record<string, string>>
+  constructor() {
+    super()
+    this.recentLinks = this.$store.state.recentLinks
+  }
+}
 </script>
 
 <style>
