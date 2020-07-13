@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <ImageBackground />
-    <ColorOverlay />
+    <ImageBackground>
+      <ColorOverlay>HE</ColorOverlay>
+    </ImageBackground>
   </div>
 </template>
 

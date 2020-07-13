@@ -1,5 +1,7 @@
 <template>
-  <div class="background"></div>
+  <div class="background">
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">

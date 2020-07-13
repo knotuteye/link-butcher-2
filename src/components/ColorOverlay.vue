@@ -1,5 +1,7 @@
 <template>
-  <div class="overlay"></div>
+  <div class="overlay">
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,6 +15,6 @@ export default class ColorOverlay extends Vue {}
 div.overlay {
   min-height: 100vh;
   width: 100vw;
-  background-color: #00ff00aa;
+  background-color: #6f16ffaa;
 }
 </style>
