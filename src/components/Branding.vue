@@ -26,8 +26,4 @@ h1.masthead {
   text-transform: lowercase;
 }
 
-div.brand {
-  width: max-content;
-  padding: 1rem 2rem;
-}
 </style>

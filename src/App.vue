@@ -6,7 +6,22 @@
           <Branding name="pbid.io" subtitle="Link Shortener"></Branding>
           <URLInput />
           <RecentLinksBox>
-            <RecentLink short="x34asd4e" original='facebook.com/assets/img/sdf'></RecentLink>
+            <RecentLink
+              short="x34asd4e"
+              original="facebook.com/assets/img/sdf"
+            ></RecentLink
+            ><RecentLink
+              short="x34asd4e"
+              original="facebook.com/assets/img/sdf"
+            ></RecentLink
+            ><RecentLink
+              short="x34asd4e"
+              original="facebook.com/assets/img/sdf"
+            ></RecentLink
+            ><RecentLink
+              short="x34asd4e"
+              original="facebook.com/assets/img/sdf"
+            ></RecentLink>
           </RecentLinksBox>
         </div>
       </ColorOverlay>
@@ -44,26 +59,21 @@ export default class App extends Vue {}
 
 .overlay {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .wrapper {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
+  height: max-content;
+  width: 80%;
+  max-width: 40rem;
 }
 
 .brand {
-  margin-top: -10rem;
   margin-bottom: 5rem;
 }
 
 .url-input {
   margin-bottom: 5rem;
-}
-
-.recent {
-  /* align-self: flex-start; */
 }
 </style>

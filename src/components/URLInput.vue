@@ -14,9 +14,7 @@ export default class URLInput extends Vue {}
 
 <style scoped>
 form {
-  width: 75%;
-  display: flex;
-  max-width: 32rem;
+ 
 }
 input {
   padding: 12px;

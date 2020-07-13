@@ -1,7 +1,9 @@
 <template>
   <div class="recent-link">
-    <p>{{ short }}</p>
-    <p>{{ original }}</p>
+    <div>
+      <a class="short" :href="short">{{ short }}</a>
+      <a class="original" :href="original">{{ original }}</a>
+    </div>
     <i class="fa fa-copy"></i>
   </div>
 </template>
@@ -17,7 +19,39 @@ export default class RecentLink extends Vue {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
 .recent-link {
-    
+  padding: 1em 2rem;
+  border: 0.5px solid #ffffff4f;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recent-link:first-of-type {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.recent-link:last-of-type {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.recent-link:nth-of-type(2n + 1) {
+  background-color: #ffffff62;
+}
+
+.recent-link > div {
+  display: grid;
+}
+
+i {
+  cursor: pointer;
+  align-self: center;
+  font-size: 1.5em;
 }
 </style>
