@@ -15,5 +15,11 @@
   "scripts": {
     "tsc": "tsc",
     "start": "tsc && node index"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.23",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.2"
   }
 }
