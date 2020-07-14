@@ -1,0 +1,19 @@
+{
+  "name": "url-shortener-server",
+  "version": "1.0.0",
+  "description": "The backend for the url shortener",
+  "main": "index.js",
+  "repository": "git@gitlab.com:geek-squad/concepts/url-shortener.git",
+  "author": "Kevin Otuteye <kevinotuteye@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.7",
+    "express": "^4.17.1",
+    "sha-1": "^1.0.0",
+    "typescript": "^3.9.6"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "start": "tsc && node index"
+  }
+}
