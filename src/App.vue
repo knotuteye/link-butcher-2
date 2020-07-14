@@ -80,6 +80,5 @@ export default class App extends Vue {
 
 .url-input {
   margin-bottom: 5rem;
-  width: 100%;
 }
 </style>

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class URLInput extends Vue {}
@@ -53,5 +53,19 @@ input[type='submit'] {
 input[type='submit']:hover {
   background-color: #ffffffcb;
   color: #6f16ff;
+}
+
+@media only screen and (max-width: 35rem) {
+  form {
+    display: grid;
+    row-gap: 1rem;
+  }
+  input {
+    width: 90%;
+    border-radius: 10px;
+  }
+  input[type='submit'] {
+    width: 100%;
+  }
 }
 </style>
