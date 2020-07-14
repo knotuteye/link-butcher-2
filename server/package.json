@@ -14,7 +14,8 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "start": "tsc && node index"
+    "start": "tsc && node index",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^26.0.4",
