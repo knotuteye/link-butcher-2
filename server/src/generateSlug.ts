@@ -9,6 +9,6 @@ export default function* (url: string): Generator {
   let hash: string = hasher(url)
   while (index <= hash.length - 8) {
     yield hash.slice(index, index + 8)
-    index++
+    index += 1
   }
 }
