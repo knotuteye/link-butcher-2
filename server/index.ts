@@ -7,13 +7,19 @@ const app: express.Application = express()
 
 const port = process.env.PORT || 5000
 
-app.get('/', function (req, res) {
-  const slug: SlugTuple | null = generateSlug(req.query.url?.toString()).next()
-    .value
-  insertLink(slug)
-  res.json(slug)
+/**SLUG ENDPOINTS */
+
+app.get('/slugs/create', function (req, res) {
+	let url = req.query.url?.toString()
+	const slugTuple: SlugTuple | null = generateSlug(url).next().value
+
+	insertLink(slugTuple)
+		.then(() => {
+			res.json(slugTuple)
+		})
+		.catch((err) => res.json(err))
 })
 
 app.listen(port, function () {
-  console.log(`URL Shortener live on port ${port}!`)
+	console.log(`URL Shortener live on port ${port}!`)
 })

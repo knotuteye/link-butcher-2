@@ -19,10 +19,12 @@ MongoDB.MongoClient.connect(uri, {
   })
   .catch((error) => console.error(error))
 
-export function insertLink(tuple: SlugTuple | null) {
-  let payload = tuple
-  if (tuple)
-    collection.insertOne(payload, () => {
-      console.log('Successful insertion')
-    })
+export function insertLink(tuple: SlugTuple | null): Promise<void> {
+  return new Promise((resolve, reject) => {
+    let payload = tuple
+    if (tuple)
+      collection.insertOne(payload, (err) => {
+        err ? reject(err) : resolve(console.log('Successful insertion'))
+      })
+  })
 }
