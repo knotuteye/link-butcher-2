@@ -7,19 +7,22 @@ import { SlugTuple } from './SlugTuple'
  * @param url The url to hash
  */
 export function* generateSlug(
-  url: string | undefined
+	url: string | undefined
 ): Generator<SlugTuple, null, void> {
-  let salt: string = `${url}${'a very spicy salt'}`
+	if (!url || url == '') {
+		return null
+	}
+	let salt: string = `${url}${'a very spicy salt'}`
 
-  let hash: string = hasher(salt)
+	let hash: string = hasher(salt)
 
-  let slugParent: string = encoder.encode(hash)
+	let slugParent: string = encoder.encode(hash)
 
-  let index: number = 0
-  while (index <= slugParent.length - 8) {
-    yield new SlugTuple(slugParent.slice(index, index + 8), url)
-    index++
-  }
+	let index: number = 0
+	while (index <= slugParent.length - 8) {
+		yield new SlugTuple(slugParent.slice(index, index + 8), url)
+		index++
+	}
 
-  return null
+	return null
 }

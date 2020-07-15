@@ -2,7 +2,7 @@
   "name": "url-shortener-server",
   "version": "1.0.0",
   "description": "The backend for the url shortener",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@gitlab.com:geek-squad/concepts/url-shortener.git",
   "author": "Kevin Otuteye <kevinotuteye@gmail.com>",
   "license": "MIT",

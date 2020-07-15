@@ -10,14 +10,15 @@ const port = process.env.PORT || 5000
 /**SLUG ENDPOINTS */
 
 app.get('/slugs/create', function (req, res) {
-	let url = req.query.url?.toString()
-	const slugTuple: SlugTuple | null = generateSlug(url).next().value
-
-	insertLink(slugTuple)
-		.then(() => {
-			res.json(slugTuple)
-		})
-		.catch((err) => res.json(err))
+	let url = req.query.url?.toString() // Convert url to string
+	const slugTuple = generateSlug(url).next().value // Generate SlugTuple instance from
+	slugTuple
+		? insertLink(slugTuple)
+				.then(() => {
+					res.json(slugTuple)
+				})
+				.catch((err) => res.json({ error: err }))
+		: res.json({ error: 'No URL Provided' })
 })
 
 app.listen(port, function () {
