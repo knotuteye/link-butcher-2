@@ -15,7 +15,7 @@ app.put('/slugs/create', function (req, res) {
 	slugTuple
 		? insertLink(slugTuple)
 				.then(() => {
-					res.json(slugTuple)
+					res.json({ slug: slugTuple.slug, url: slugTuple.url })
 				})
 				.catch((err) => res.json({ error: err }))
 		: res.json({ error: 'No URL Provided' })
