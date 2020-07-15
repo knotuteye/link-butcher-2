@@ -9,22 +9,33 @@ let DB: MongoDB.Db
 let collection: MongoDB.Collection
 
 MongoDB.MongoClient.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 })
-  .then((client) => {
-    console.log('Connected to DB')
-    DB = client.db(credentials.database)
-    collection = DB.collection('urlMap')
-  })
-  .catch((error) => console.error(error))
+	.then((client) => {
+		console.log('Connected to DB')
+		DB = client.db(credentials.database)
+		collection = DB.collection('urlMap')
+	})
+	.catch((error) => console.error(error))
 
 export function insertLink(tuple: SlugTuple | null): Promise<void> {
-  return new Promise((resolve, reject) => {
-    let payload = tuple
-    if (tuple)
-      collection.insertOne(payload, (err) => {
-        err ? reject(err) : resolve(console.log('Successful insertion'))
-      })
-  })
+	return new Promise((resolve, reject) => {
+		let payload = tuple
+		if (tuple)
+			collection.insertOne(payload, (err) => {
+				err ? reject(err) : resolve(console.log('Successful insertion'))
+			})
+	})
+}
+
+export function getURLIfAlreadyExists(url: string): Promise<SlugTuple | null> {
+	return new Promise((resolve, reject) => {
+		collection
+			.findOne({ url: url })
+			.then((result) => {
+				resolve(result || null)
+			})
+			.catch((err) => reject(err))
+	})
 }
