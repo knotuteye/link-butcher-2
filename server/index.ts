@@ -1,6 +1,11 @@
 import express = require('express')
 import { generateSlug, optimizedSlugRoutine } from './src/hash/generateSlug'
-import { insertLink, URLAlreadyExists } from './src/db/database_operations'
+import {
+	insertLink,
+	URLAlreadyExists,
+	getAllTuples,
+	getURLOfExistingSlugTuple,
+} from './src/db/database_operations'
 import { SlugTuple } from './src/hash/SlugTuple'
 
 const app: express.Application = express()
@@ -48,8 +53,18 @@ app.get('/slugs/create', function (req, res) {
 	})
 })
 
-app.get('/slugs/all', (res, req, next) => {
-	
+app.get('/slugs/all', async function (req, res) {
+	res.json(await getAllTuples())
+})
+
+/**REDIRECT ENDPOINT */
+app.get('/:slug', async (req, res) => {
+	let url = await getURLOfExistingSlugTuple(req.params.slug)
+	url ? res.redirect(url) : res.json({ error: 'This link does not exist' })
+})
+
+app.get('/', (req, res) => {
+	res.send('<h1>URL Shrink Backend</h1>')
 })
 
 app.listen(port, function () {

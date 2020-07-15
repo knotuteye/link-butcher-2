@@ -44,3 +44,19 @@ export async function URLAlreadyExists(tuple: SlugTuple | null) {
 	let results = await collection.findOne({ slug: tuple?.slug })
 	return results ? true : false
 }
+
+export async function getURLOfExistingSlugTuple(slug: string) {
+	let skyTuple = await collection.findOne({ slug: slug })
+	return skyTuple?.url || null
+}
+
+export async function getAllTuples() {
+	let cursor = await collection.find()
+	let results: Array<SlugTuple> = []
+	while (await cursor.hasNext()) {
+		let elem = await cursor.next()
+		delete elem._id
+		results.push(elem)
+	}
+	return results
+}
