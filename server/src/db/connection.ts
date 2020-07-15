@@ -1,19 +1,19 @@
 import MongoDB = require('mongodb')
 
-const credentials = require('./credentials.json')
+import credentials = require('../db/credentials.json')
 
-const uri = `mongodb+srv://${credentials.name}:${credentials.password}@cluster0.1quzr.mongodb.net/${credentials.database}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${credentials.name}:${credentials.password}@${credentials.server}/${credentials.database}?retryWrites=true&w=majority`
 
-function DBConnect(): Promise<MongoDB.MongoClient | MongoDB.MongoError> {
-  return new Promise((resolve, reject) => {
-    new MongoDB.MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }).connect((err, result) => {
-      if (err) reject(err)
-      else resolve(result)
-    })
+let DB: MongoDB.Db
+let collection: MongoDB.Collection
+
+MongoDB.MongoClient.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then((client) => {
+    console.log('Connected to DB')
+    DB = client.db(credentials.database)
+    collection = DB.collection('urlMap')
   })
-}
-
-module.exports = { DBConnect }
+  .catch((error) => console.error(error))
