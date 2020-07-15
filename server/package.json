@@ -10,18 +10,22 @@
     "@types/express": "^4.17.7",
     "base64-url": "^2.3.3",
     "express": "^4.17.1",
+    "mongodb": "^3.5.9",
     "sha-1": "^1.0.0",
     "typescript": "^3.9.6"
   },
   "scripts": {
     "tsc": "tsc",
-    "start": "tsc && node index",
+    "start": "tsc && node dist/index",
     "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^26.0.4",
+    "@types/mongoose": "^5.7.31",
     "@types/node": "^14.0.23",
     "jest": "^26.1.0",
-    "ts-jest": "^26.1.2"
+    "nodemon": "^2.0.4",
+    "ts-jest": "^26.1.2",
+    "ts-node": "^8.10.2"
   }
 }
