@@ -1,4 +1,4 @@
-const generateSlug = require('../src/generateSlug').default
+let generateSlug = require('../src/generateSlug').default
 
 test('should return slug', () => {
   expect(generateSlug('https://google.com').next().value).toBe('72fe95c5')
