@@ -1,6 +1,7 @@
 import MongoDB = require('mongodb')
 
-import credentials = require('../db/credentials.json')
+import credentials = require('./credentials.json')
+import { SlugTuple } from '../hash/SlugTuple'
 
 const uri = `mongodb+srv://${credentials.name}:${credentials.password}@${credentials.server}/${credentials.database}?retryWrites=true&w=majority`
 
@@ -17,3 +18,11 @@ MongoDB.MongoClient.connect(uri, {
     collection = DB.collection('urlMap')
   })
   .catch((error) => console.error(error))
+
+export function insertLink(tuple: SlugTuple | null) {
+  let payload = tuple
+  if (tuple)
+    collection.insertOne(payload, () => {
+      console.log('Successful insertion')
+    })
+}
