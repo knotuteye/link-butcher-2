@@ -24,7 +24,7 @@ export function insertLink(tuple: SlugTuple | null): Promise<void> {
 		let payload = tuple
 		if (tuple)
 			collection.insertOne(payload, (err) => {
-				err ? reject(err) : resolve(console.log('Successful insertion'))
+				err ? reject(err) : resolve(console.log('Successful Insertion'))
 			})
 	})
 }

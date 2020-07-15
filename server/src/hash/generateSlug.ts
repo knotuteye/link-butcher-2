@@ -13,11 +13,9 @@ export function optimizedSlugRoutine(
 
 		getURLIfAlreadyExists(url)
 			.then((result: SlugTuple | null) => {
-				console.log(result)
-
 				let oldSlugTuple = result || null
 
-				if (result) console.log('Using Old Link')
+				if (result) console.log('Using Previous Link')
 
 				resolve(oldSlugTuple)
 			})

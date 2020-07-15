@@ -22,25 +22,34 @@ app.get('/slugs/create', function (req, res) {
 			slugTuple = hook.next().value
 
 			// TODO: Make this recursive
-			URLAlreadyExists(slugTuple).then(async (bool) => {
-				while (bool) {
-					slugTuple = hook.next().value
+			URLAlreadyExists(slugTuple)
+				.then(async (bool) => {
+					while (bool) {
+						console.log('Recursive Generation Entered')
+						slugTuple = hook.next().value
+						console.log(slugTuple?.slug)
 
-					bool = await URLAlreadyExists(slugTuple)
-				}
-			})
+						bool = await URLAlreadyExists(slugTuple)
+					}
+				})
 
-			slugTuple
-				? insertLink(slugTuple)
-						.then(() => {
-							res.json({ slug: slugTuple?.slug, url: slugTuple?.url })
-						})
-						.catch((err) =>
-							res.json({ error: err || 'An error occurred. Retry' })
-						)
-				: res.json({ error: 'No URL Provided' })
+				.then(() => {
+					slugTuple
+						? insertLink(slugTuple)
+								.then(() => {
+									res.json({ slug: slugTuple?.slug, url: slugTuple?.url })
+								})
+								.catch((err) =>
+									res.json({ error: err || 'An error occurred. Retry' })
+								)
+						: res.json({ error: 'No URL Provided' })
+				})
 		}
 	})
+})
+
+app.get('/slugs/all', (res, req, next) => {
+	
 })
 
 app.listen(port, function () {
