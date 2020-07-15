@@ -1,6 +1,9 @@
 var generateSlug = require('../src/generateSlug').default
 
-for (let index = 0; index < 13; index++) {
-  let hook = generateSlug('https://google.com')
-  console.log(hook.next().value)
+let hook = generateSlug('https://google.com')
+let curr = hook.next()
+
+while (!curr.done) {
+  console.log(curr.value)
+  curr = hook.next()
 }

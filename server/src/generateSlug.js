@@ -33,21 +33,22 @@ var hasher = require('sha-1');
  * @param url The url to hash
  */
 function default_1(url) {
-    var index, hash;
+    var salt, hash, index;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                salt = "" + url + Date.now;
+                hash = hasher(salt);
                 index = 0;
-                hash = hasher(url);
                 _a.label = 1;
             case 1:
                 if (!(index <= hash.length - 8)) return [3 /*break*/, 3];
                 return [4 /*yield*/, hash.slice(index, index + 8)];
             case 2:
                 _a.sent();
-                index += 1;
+                index++;
                 return [3 /*break*/, 1];
-            case 3: return [2 /*return*/];
+            case 3: return [2 /*return*/, null];
         }
     });
 }
