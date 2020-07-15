@@ -8,9 +8,9 @@
           <RecentLinksBox>
             <RecentLink
               v-for="obj in recentLinks"
-              :key="obj.short"
-              :short="obj.short"
-              :original="obj.original"
+              :key="obj.slug"
+              :short="obj.slug"
+              :original="obj.url"
             >
             </RecentLink>
           </RecentLinksBox>
@@ -28,6 +28,7 @@ import Branding from './components/Branding.vue'
 import URLInput from './components/URLInput.vue'
 import RecentLinksBox from './components/RecentLinksBox.vue'
 import RecentLink from './components/RecentLink.vue'
+import { getRecentLinks } from './api/calls'
 
 @Component({
   components: {
@@ -40,10 +41,14 @@ import RecentLink from './components/RecentLink.vue'
   }
 })
 export default class App extends Vue {
-  private recentLinks: Array<Record<string, string>>
   constructor() {
     super()
-    this.recentLinks = this.$store.state.recentLinks
+    getRecentLinks('http://localhost:5000/slugs/all').then(data => {
+      this.$store.commit('updateRecentLinks', data)
+    })
+  }
+  get recentLinks() {
+    return this.$store.state.recentLinks
   }
 }
 </script>

@@ -1,14 +1,18 @@
 import express = require('express')
-import { generateSlug, optimizedSlugRoutine } from './src/hash/generateSlug'
+import cors = require('cors')
 import {
-	insertLink,
-	URLAlreadyExists,
 	getAllTuples,
 	getURLOfExistingSlugTuple,
+	insertLink,
+	URLAlreadyExists,
 } from './src/db/database_operations'
+import { generateSlug, optimizedSlugRoutine } from './src/hash/generateSlug'
 import { SlugTuple } from './src/hash/SlugTuple'
 
 const app: express.Application = express()
+
+app.use(cors())
+app.use(express.static('public'))
 
 const port = process.env.PORT || 5000
 
