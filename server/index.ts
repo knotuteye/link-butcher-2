@@ -1,6 +1,6 @@
 import express = require('express')
 import { generateSlug, optimizedSlugRoutine } from './src/hash/generateSlug'
-import { insertLink } from './src/db/database_operations'
+import { insertLink, URLAlreadyExists } from './src/db/database_operations'
 import { SlugTuple } from './src/hash/SlugTuple'
 
 const app: express.Application = express()
@@ -18,7 +18,18 @@ app.get('/slugs/create', function (req, res) {
 		if (result) {
 			res.json({ slug: result.slug, url: result.url })
 		} else {
-			slugTuple = generateSlug(url).next().value // Generate SlugTuple instance from
+			let hook = generateSlug(url)
+			slugTuple = hook.next().value
+
+			// TODO: Make this recursive
+			URLAlreadyExists(slugTuple).then(async (bool) => {
+				while (bool) {
+					slugTuple = hook.next().value
+
+					bool = await URLAlreadyExists(slugTuple)
+				}
+			})
+
 			slugTuple
 				? insertLink(slugTuple)
 						.then(() => {
