@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000
 
 /**SLUG ENDPOINTS */
 
-app.put('/slugs/create', function (req, res) {
+app.post('/slugs/create', function (req, res) {
 	let url = req.query.url?.toString() // Convert url to string
 	const slugTuple = generateSlug(url).next().value // Generate SlugTuple instance from
 	slugTuple
