@@ -1,15 +1,18 @@
 let generateSlug = require('../src/generateSlug').default
 
 test('should return slug', () => {
-  expect(generateSlug('https://google.com').next().value).toBe('72fe95c5')
+  expect(generateSlug('https://www.google.com').next().value).toBe('ZDNkNjJk')
 })
 
-test('should return slug', () => {
-  expect(generateSlug('https://www.google.com/doodles').next().value).toBe(
-    'bb14ca9d'
-  )
-})
+function checkAlternativeSlug(index: number): string {
+  const hook: Generator = generateSlug('https://www.google.com')
+  for (let i = 0; i < index; i++) {
+    hook.next()
+  }
+  let str = hook.next().value
+  return str
+}
 
-test('should return slug', () => {
-  expect(generateSlug('pbid.io').next().value).toBe('79cf4af9')
+test('should return nth slug', () => {
+  expect(checkAlternativeSlug(5)).toBe('jJkYzEzM')
 })

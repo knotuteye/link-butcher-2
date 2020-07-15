@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1594807387167" clover="3.2.0">
+  <project timestamp="1594807387167" name="All files">
+    <metrics statements="11" coveredstatements="9" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1" elements="15" coveredelements="11" complexity="0" loc="11" ncloc="11" packages="1" files="1" classes="1"/>
+    <file name="generateSlug.ts" path="/mnt/2CEC3CF7EC3CBD40/Projects/Work/url-shortener/server/src/generateSlug.ts">
+      <metrics statements="11" coveredstatements="9" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="0" type="stmt"/>
+      <line num="20" count="0" type="cond" truecount="0" falsecount="1"/>
+    </file>
+  </project>
+</coverage>
