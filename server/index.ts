@@ -17,7 +17,7 @@ app.post('/slugs/create', function (req, res) {
 				.then(() => {
 					res.json({ slug: slugTuple.slug, url: slugTuple.url })
 				})
-				.catch((err) => res.json({ error: err }))
+				.catch((err) => res.json({ error: err || 'An error occurred. Retry' }))
 		: res.json({ error: 'No URL Provided' })
 })
 
