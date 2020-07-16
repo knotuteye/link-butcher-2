@@ -1,7 +1,7 @@
 <template>
   <form class="url-input">
     <input type="url" name="url" placeholder="Paste a link to shorten it" />
-    <input type="submit" value="Shrink" />
+    <input type="submit" value="Shrink" />+
   </form>
 </template>
 
@@ -53,6 +53,11 @@ input[type='submit'] {
 input[type='submit']:hover {
   background-color: #ffffffcb;
   color: #6f16ff;
+}
+
+input[type='submit']:focus {
+  background-color: #28a018cb;
+  color: #ffffff;
 }
 
 @media only screen and (max-width: 35rem) {

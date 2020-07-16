@@ -43,9 +43,7 @@ import { getRecentLinks } from './api/calls'
 export default class App extends Vue {
   constructor() {
     super()
-    getRecentLinks('http://localhost:5000/slugs/all').then(data => {
-      this.$store.commit('updateRecentLinks', data)
-    })
+    
   }
   get recentLinks() {
     return this.$store.state.recentLinks
