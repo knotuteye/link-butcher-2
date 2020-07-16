@@ -1,5 +1,5 @@
 <template>
-  <div class="recent">
+  <div class="recent scale-in-ver-center">
     <h3>Recent Links</h3>
     <div class="box"><slot></slot></div>
   </div>
@@ -55,4 +55,23 @@ h3 {
     background: transparent url('../assets/scrollbar.png') repeat-y !important;
   }
 }
+
+
+/* Animation */
+.scale-in-ver-center {
+	animation: scale-in-ver-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ */
+@keyframes scale-in-ver-center {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
 </style>

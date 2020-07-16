@@ -8,8 +8,3 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
-particlesJS.load('overlay', './js/particles.json', function() {
-  console.log('callback - particles.js config loaded')
-})
-

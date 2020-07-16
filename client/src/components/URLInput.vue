@@ -102,6 +102,11 @@ input[type='submit']:focus {
     width: 90%;
     border-radius: 10px;
   }
+
+  input[type='url'] {
+    border-right: 2px solid #28a01875;
+  }
+
   input[type='submit'] {
     width: 100%;
     border-radius: 10px;
