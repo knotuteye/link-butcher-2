@@ -98,7 +98,7 @@ export default class App extends Vue {
   height: max-content;
   width: 80%;
   max-width: 40rem;
-  margin-top: 25vh;
+  margin-top: 18vh;
   z-index: 2;
   padding-bottom: 2rem;
   box-sizing: border-box;
