@@ -1,13 +1,18 @@
 <template>
   <form class="url-input" v-on:submit.prevent>
-    <input type="submit" value="Shrink" @click="updateTuple(url)" />
+    <input
+      type="submit"
+      aria-label="Shrink the pasted link"
+      value="Shrink"
+      @click="updateTuple(url)"
+    />
     <input
       type="url"
       v-model="url"
       name="url"
       placeholder="Paste a link to shorten it"
       required
-      tabindex="1"
+      aria-label="Paste a link here"
     />
   </form>
 </template>
