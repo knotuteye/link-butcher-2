@@ -2,7 +2,9 @@
   <div class="recent-link">
     <div>
       <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
-      <a class="original" :href="original">{{ original }}</a>
+      <a class="original" :href="original" :title="original">{{
+        original.slice(0, 20) + '...'
+      }}</a>
     </div>
     <i @click="copyToClipboard" title="Copy" class="fa fa-copy"></i>
   </div>
@@ -32,6 +34,7 @@ a {
   text-decoration: none;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
+  font-size: 0.9em;
 }
 
 a.short {
@@ -40,20 +43,14 @@ a.short {
 
 .recent-link {
   padding: 1em 2rem;
-  border: 0.5px solid #ffffff4f;
+  border-bottom: 0.5px solid #ffffff4f;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
 }
 
-.recent-link:first-of-type {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
 .recent-link:last-of-type {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom: 0;
 }
 
 .recent-link:nth-of-type(2n + 1) {

@@ -10,7 +10,7 @@
             :short="newTuple.slug"
             :original="newTuple.url"
           />
-          <RecentLinksBox>
+          <RecentLinksBox v-if="recentLinks.length != 0">
             <RecentLink
               v-for="obj in recentLinks"
               :key="obj.slug"
@@ -102,7 +102,11 @@ export default class App extends Vue {
   margin-bottom: 5rem;
 }
 
+#bubble {
+  margin-bottom: 2rem;
+}
+
 .url-input {
-  margin-bottom: 5rem;
+  margin: 2rem 0;
 }
 </style>

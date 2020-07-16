@@ -8,6 +8,7 @@ export default new Vuex.Store({
     server: 'http://localhost:5000/',
     recentLinks: [],
     newTuple: null,
+    bubbleAnim: 'jello-horizontal',
     connectionError: false
   },
   mutations: {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     updateConnectionError(state, bool) {
       state.connectionError = bool
+    },
+    updateBubbleAnim(state, style) {
+      state.bubbleAnim = style
     }
   },
   actions: {},
