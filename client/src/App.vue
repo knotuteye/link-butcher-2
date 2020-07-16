@@ -78,12 +78,18 @@ export default class App extends Vue {
   outline: none;
 }
 
+.background {
+  overflow: hidden;
+}
+
 #overlay > canvas {
+  overflow: hidden;
   position: fixed;
   z-index: 1;
 }
 
 .overlay {
+  overflow: hidden;
   display: flex;
   justify-content: center;
 }
