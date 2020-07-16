@@ -9,8 +9,6 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "./dist",
-    "sourceMap": true,
     "baseUrl": ".",
     "types": ["webpack-env"],
     "paths": {

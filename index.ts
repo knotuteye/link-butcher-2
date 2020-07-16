@@ -12,7 +12,7 @@ import { SlugTuple } from './src/hash/SlugTuple'
 const app: express.Application = express()
 
 app.use(cors())
-app.use(express.static('public'))
+app.use(express.static('./client/dist'))
 
 const port = process.env.PORT || 5000
 

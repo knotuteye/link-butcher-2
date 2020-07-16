@@ -5,7 +5,7 @@ import { getRecentLinks } from './api/calls'
 
 Vue.config.productionTip = false
 
-getRecentLinks('http://localhost:5000/slugs/all').then(data => {
+getRecentLinks(`${window.location.href}slugs/all`).then(data => {
   store.commit('updateRecentLinks', data)
 })
 
