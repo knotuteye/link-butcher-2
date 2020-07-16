@@ -81,7 +81,6 @@ i {
 }
 i > svg {
   fill: #ffffffa9;
-  font-size: 1.5em;
 }
 
 i > svg:hover {

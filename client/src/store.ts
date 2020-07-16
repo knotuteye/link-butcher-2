@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     updateRecentLinks(state, arr) {
-      state.recentLinks = arr
+      state.recentLinks = arr.reverse()
     },
 
     updateNewLink(state, tuple) {
