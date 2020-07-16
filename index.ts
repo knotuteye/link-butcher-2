@@ -17,8 +17,6 @@ app.use(cors())
 app.use(express.static('./client/dist'))
 app.use(bodyParser.json())
 
-const port = process.env.PORT || 5000
-
 /**SLUG ENDPOINTS */
 
 app.post('/slugs/create', function (req, res) {
@@ -78,6 +76,6 @@ app.get('/', (req, res) => {
   res.send('<h1>URL Shrink Backend</h1>')
 })
 
-app.listen(port, function () {
-  console.log(`URL Shortener live on port ${port}!`)
+app.listen(process.env.PORT || 5000, function () {
+  console.log(`URL Shortener live !`)
 })
