@@ -1,12 +1,12 @@
 <template>
-  <form class="url-input" :action="`javascript:${updateTuple(url)}`">
+  <form class="url-input" v-on:submit.prevent>
     <input
       type="url"
       v-model="url"
       name="url"
       placeholder="Paste a link to shorten it"
     />
-    <input type="submit" value="Shrink" />+
+    <input type="submit" value="Shrink" @click="updateTuple(url)" />+
   </form>
 </template>
 
@@ -18,9 +18,10 @@ import { getNewLink } from '../api/calls'
 export default class URLInput extends Vue {
   public url = ''
   async updateTuple(url: string) {
-    const tuple = await getNewLink(`${window.location.href}slugs/create`, url)
+    console.log(url)
+    const tuple = await getNewLink(url)
     this.$store.commit('updateNewLink', tuple)
-    console.log(tuple)
+    console.log('Here', tuple)
   }
 }
 </script>

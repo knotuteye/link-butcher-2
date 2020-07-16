@@ -50,10 +50,11 @@ import { getRecentLinks } from './api/calls'
 export default class App extends Vue {
   constructor() {
     super()
+    this.fetchAndUpdateRecentLinks()
   }
 
   fetchAndUpdateRecentLinks() {
-    getRecentLinks(`${window.location.href}slugs/all`)
+    getRecentLinks()
       .then(data => {
         this.$store.commit('updateRecentLinks', data)
       })

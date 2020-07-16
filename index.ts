@@ -1,5 +1,7 @@
 import express = require('express')
 import cors = require('cors')
+import bodyParser = require('body-parser')
+
 import {
 	getAllTuples,
 	getURLOfExistingSlugTuple,
@@ -13,13 +15,16 @@ const app: express.Application = express()
 
 app.use(cors())
 app.use(express.static('./client/dist'))
+app.use(bodyParser.json())
 
 const port = process.env.PORT || 5000
 
 /**SLUG ENDPOINTS */
 
-app.get('/slugs/create', function (req, res) {
-	let url = req.query.url?.toString() // Convert url to string
+app.post('/slugs/create', function (req, res) {
+	let url = req.body.url?.toString() // Convert url to string
+
+	console.log(url)
 
 	let slugTuple: SlugTuple | null
 
@@ -57,7 +62,7 @@ app.get('/slugs/create', function (req, res) {
 	})
 })
 
-app.get('/slugs/all', async function (req, res) {
+app.post('/slugs/all', async function (req, res) {
 	res.json(await getAllTuples())
 })
 

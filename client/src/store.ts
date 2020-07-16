@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    server: 'http://localhost:5000/',
     recentLinks: [],
     newTuple: null,
     connectionError: false
