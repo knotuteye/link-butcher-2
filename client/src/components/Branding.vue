@@ -1,5 +1,5 @@
 <template>
-  <div class="brand">
+  <div class="brand slide-in-top">
     <h1 class="masthead">
       {{ name }}
     </h1>
@@ -25,5 +25,20 @@ h1.masthead {
   letter-spacing: 4px;
   text-transform: lowercase;
   text-align: center;
+}
+
+.slide-in-top {
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>

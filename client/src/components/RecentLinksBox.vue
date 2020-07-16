@@ -56,13 +56,11 @@ h3 {
   }
 }
 
-
 /* Animation */
 .scale-in-ver-center {
-	animation: scale-in-ver-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: scale-in-ver-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
- */
 @keyframes scale-in-ver-center {
   0% {
     transform: scaleY(0);
@@ -73,5 +71,4 @@ h3 {
     opacity: 1;
   }
 }
-
 </style>
