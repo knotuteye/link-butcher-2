@@ -24,7 +24,7 @@ const port = process.env.PORT || 5000
 app.post('/slugs/create', function (req, res) {
   let url = req.body.url?.toString() // Convert url to string
 
-  console.log(url)
+  // console.log(url)
 
   let slugTuple: SlugTuple | null
 
@@ -39,9 +39,9 @@ app.post('/slugs/create', function (req, res) {
       URLAlreadyExists(slugTuple)
         .then(async (bool) => {
           while (bool) {
-            console.log('Recursive Generation Entered')
+            // console.log('Recursive Generation Entered')
             slugTuple = hook.next().value
-            console.log(slugTuple?.slug)
+            // console.log(slugTuple?.slug)
 
             bool = await URLAlreadyExists(slugTuple)
           }
