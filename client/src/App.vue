@@ -34,6 +34,7 @@ import URLInput from './components/URLInput.vue'
 import RecentLinksBox from './components/RecentLinksBox.vue'
 import RecentLink from './components/RecentLink.vue'
 import Bubble from './components/Bubble.vue'
+import { getRecentLinks } from './api/calls'
 
 @Component({
   components: {
@@ -50,6 +51,17 @@ export default class App extends Vue {
   constructor() {
     super()
   }
+
+  fetchAndUpdateRecentLinks() {
+    getRecentLinks(`${window.location.href}slugs/all`)
+      .then(data => {
+        this.$store.commit('updateRecentLinks', data)
+      })
+      .catch(() => {
+        this.$store.commit('updateConnectionError', true)
+      })
+  }
+
   get recentLinks() {
     return this.$store.state.recentLinks
   }

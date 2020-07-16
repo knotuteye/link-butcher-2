@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     recentLinks: [],
-    newTuple: null
+    newTuple: null,
+    connectionError: false
   },
   mutations: {
     updateRecentLinks(state, arr) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
 
     updateNewLink(state, tuple) {
       state.newTuple = tuple
+    },
+    updateConnectionError(state, bool) {
+      state.connectionError = bool
     }
   },
   actions: {},

@@ -1,15 +1,28 @@
 <template>
-  <form class="url-input">
-    <input type="url" name="url" placeholder="Paste a link to shorten it" />
+  <form class="url-input" :action="`javascript:${updateTuple(url)}`">
+    <input
+      type="url"
+      v-model="url"
+      name="url"
+      placeholder="Paste a link to shorten it"
+    />
     <input type="submit" value="Shrink" />+
   </form>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { getNewLink } from '../api/calls'
 
 @Component
-export default class URLInput extends Vue {}
+export default class URLInput extends Vue {
+  public url = ''
+  async updateTuple(url: string) {
+    const tuple = await getNewLink(`${window.location.href}slugs/create`, url)
+    this.$store.commit('updateNewLink', tuple)
+    console.log(tuple)
+  }
+}
 </script>
 
 <style scoped>
