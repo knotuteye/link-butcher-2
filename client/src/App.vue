@@ -5,6 +5,11 @@
         <div class="wrapper">
           <Branding name="pbid.io" subtitle="Link Shortener"></Branding>
           <URLInput />
+          <Bubble
+            v-if="newTuple"
+            :short="newTuple.slug"
+            :original="newTuple.url"
+          />
           <RecentLinksBox>
             <RecentLink
               v-for="obj in recentLinks"
@@ -28,7 +33,7 @@ import Branding from './components/Branding.vue'
 import URLInput from './components/URLInput.vue'
 import RecentLinksBox from './components/RecentLinksBox.vue'
 import RecentLink from './components/RecentLink.vue'
-import { getRecentLinks } from './api/calls'
+import Bubble from './components/Bubble.vue'
 
 @Component({
   components: {
@@ -37,16 +42,19 @@ import { getRecentLinks } from './api/calls'
     Branding,
     URLInput,
     RecentLinksBox,
-    RecentLink
+    RecentLink,
+    Bubble
   }
 })
 export default class App extends Vue {
   constructor() {
     super()
-    
   }
   get recentLinks() {
     return this.$store.state.recentLinks
+  }
+  get newTuple() {
+    return this.$store.state.newTuple
   }
 }
 </script>
