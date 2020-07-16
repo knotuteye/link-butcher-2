@@ -48,11 +48,11 @@ h3 {
   }
 
   .box::-webkit-scrollbar-track-piece:start {
-    background: transparent url('../assets/scrollbar.png') repeat-y !important;
+    background: transparent url('../assets/scrollbar.webp') repeat-y !important;
   }
 
   .box::-webkit-scrollbar-track-piece:end {
-    background: transparent url('../assets/scrollbar.png') repeat-y !important;
+    background: transparent url('../assets/scrollbar.webp') repeat-y !important;
   }
 }
 
