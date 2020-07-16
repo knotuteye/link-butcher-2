@@ -31,15 +31,6 @@
         particlesJS.load('overlay', './js/particles.json', function() {
           console.log('Page Rendered')
         })
-        setInterval(() => {
-          var docWidth = document.documentElement.offsetWidth
-
-          ;[].forEach.call(document.querySelectorAll('*'), function(el) {
-            if (el.offsetWidth > docWidth) {
-              console.log(el)
-            }
-          })
-        }, 2000)
       }
     </script>
   </body>
