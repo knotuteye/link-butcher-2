@@ -83,8 +83,12 @@ i {
   font-size: 1.5em;
   color: #ffffffa9;
 }
+i > svg {
+  fill: #ffffffa9;
+  font-size: 1.5em;
+}
 
-i:hover {
-  color: #ffffff;
+i > svg:hover {
+  fill: #ffffff;
 }
 </style>

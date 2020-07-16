@@ -11,9 +11,8 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill="white"
-        width="18px"
-        height="18px"
+        width="30px"
+        height="30px"
       >
         <path d="M0 0h24v24H0z" fill="none" />
         <path
@@ -80,9 +79,13 @@ i {
   font-size: 1.5em;
   color: #ffffffa9;
 }
+i > svg {
+  fill: #ffffffa9;
+  font-size: 1.5em;
+}
 
-i:hover {
-  color: #ffffff;
+i > svg:hover {
+  fill: #ffffff;
 }
 
 /* Animations */
