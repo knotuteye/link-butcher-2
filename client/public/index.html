@@ -3,14 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="preload"
+      href="./css/performance.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title>pbid.io - Shrink URLs fast</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta
       name="description"
       content="A URL Shortener built with the MEVN Stack"
     />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <link rel="stylesheet" href="./css/performance.css" />
-    <title>pbid.io - Shrink URLs fast</title>
   </head>
   <body onload="loadParticles()">
     <noscript>
