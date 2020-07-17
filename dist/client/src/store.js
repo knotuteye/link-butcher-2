@@ -8,8 +8,8 @@ var vuex_1 = __importDefault(require("vuex"));
 vue_1.default.use(vuex_1.default);
 exports.default = new vuex_1.default.Store({
     state: {
-        server: 'http://localhost:5000/',
-        // server: window.location.href,
+        // server: 'http://localhost:5000/',
+        server: window.location.href,
         recentLinks: [],
         newTuple: null,
         connectionError: false
