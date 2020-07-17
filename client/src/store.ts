@@ -7,13 +7,17 @@ export default new Vuex.Store({
   state: {
     // server: 'http://localhost:5000/',
     server: window.location.href,
-    recentLinks: [],
+    recentLinks: new Array(),
     newTuple: null,
     connectionError: false
   },
   mutations: {
     updateRecentLinks(state, arr) {
       state.recentLinks = arr
+    },
+
+    addToRecentLinkStack(state, tuple) {
+      state.recentLinks.unshift(tuple)
     },
 
     updateNewLink(state, tuple) {

@@ -68,5 +68,5 @@
 
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "client", "coverage", "src/tests", "**/*.spec.ts"]
+  "exclude": ["node_modules", "client", "coverage", "tests", "**/*.spec.ts"]
 }

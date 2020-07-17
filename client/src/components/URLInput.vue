@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { getNewLink } from '../api/calls'
+import { getNewLink, getRecentLinks } from '../api/calls'
 @Component
 export default class URLInput extends Vue {
   public url = ''
@@ -25,6 +25,7 @@ export default class URLInput extends Vue {
     if (this.url || this.url != '') {
       const tuple = await getNewLink(this.url)
       this.$store.commit('updateNewLink', tuple)
+      this.$store.commit('addToRecentLinkStack', tuple)
     }
   }
   standardizeURL() {
