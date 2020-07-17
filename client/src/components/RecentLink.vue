@@ -90,4 +90,10 @@ i > svg {
 i > svg:hover {
   fill: #ffffff;
 }
+
+@media only screen and (max-width: 35rem) {
+  a {
+    font-size: 0.8em;
+  }
+}
 </style>

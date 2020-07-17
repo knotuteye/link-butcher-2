@@ -24,7 +24,6 @@ h3 {
 
 .box {
   overflow: auto;
-  max-height: 22rem;
   border-radius: 10px;
   border: 1px solid #ffffff67;
 }

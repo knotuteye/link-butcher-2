@@ -24,13 +24,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { getRecentLinks } from '../api/calls'
 
 @Component
 export default class Bubble extends Vue {
   @Prop() private short!: string
   @Prop() private original!: string
-  public anim = this.$store.state.bubbleAnim
+
+  @Watch('short') onShortChange() {
+    this.anim = ''
+    setTimeout(() => {
+      this.anim = 'jello-horizontal'
+      getRecentLinks().then(data => {
+        this.$store.commit('updateRecentLinks', data)
+      })
+    }, 0)
+  }
+
+  public anim = 'jello-horizontal'
   copyToClipboard(): void {
     const el = document.createElement('textarea')
     el.value = `pbid.io/${this.short}`
@@ -76,7 +88,7 @@ a.short {
 i {
   cursor: pointer;
   align-self: center;
-  font-size: 1.5em;
+
   color: #ffffffa9;
 }
 i > svg {
@@ -85,6 +97,12 @@ i > svg {
 
 i > svg:hover {
   fill: #ffffff;
+}
+
+@media only screen and (max-width: 35rem) {
+  a {
+    font-size: 0.8em;
+  }
 }
 
 /* Animations */

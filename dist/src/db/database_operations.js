@@ -106,7 +106,7 @@ function getAllTuples() {
         var cursor, results, elem;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, collection.find()];
+                case 0: return [4 /*yield*/, collection.find().limit(6)];
                 case 1:
                     cursor = _a.sent();
                     results = [];

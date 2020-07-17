@@ -15,6 +15,7 @@ export default class ImageBackground extends Vue {}
 div.background {
   min-height: 100vh;
   width: 100vw;
+  background-color: #000;
   background-image: url('../assets/backImg.webp');
   background-repeat: no-repeat;
   background-position: center;

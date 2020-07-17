@@ -6,6 +6,7 @@
       v-model="url"
       name="url"
       :class="err"
+      spellcheck="false"
       placeholder="Paste a link to shorten it"
       required
       aria-label="Paste a link here"
@@ -141,12 +142,13 @@ input[type='submit']:focus {
     margin: 0;
   }
   input {
-    width: 90%;
     border-radius: 10px;
   }
 
   input[type='url'] {
     border-right: 2px solid #28a01875;
+    text-overflow: ellipsis;
+    width: 90%;
   }
 
   input[type='submit'] {

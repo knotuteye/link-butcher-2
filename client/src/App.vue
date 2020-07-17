@@ -115,4 +115,21 @@ export default class App extends Vue {
 .url-input {
   margin: 2rem 0;
 }
+
+.box {
+  max-height: 22rem;
+}
+
+@media only screen and (max-width: 35rem) {
+  .wrapper {
+    margin-top: 12vh;
+  }
+  .brand {
+    margin-bottom: 5vh;
+  }
+
+  .box {
+    max-height: 40vh;
+  }
+}
 </style>
