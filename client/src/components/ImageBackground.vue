@@ -18,6 +18,7 @@ div.background {
   background-image: url('../assets/backImg.webp');
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
   background-size: cover;
 }
 </style>
