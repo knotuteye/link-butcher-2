@@ -2,9 +2,9 @@
   <div class="recent-link">
     <div>
       <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
-      <a class="original" :href="original" :title="original">{{
-        original.slice(0, 20) + '...'
-      }}</a>
+      <p class="original" :title="original">
+        {{ original.slice(0, 20) + '...' }}
+      </p>
     </div>
     <i @click="copyToClipboard" title="Copy" class="copy-icon">
       <svg
@@ -42,7 +42,8 @@ export default class RecentLink extends Vue {
 </script>
 
 <style scoped>
-a {
+a,
+p {
   text-decoration: none;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
@@ -72,7 +73,7 @@ a.short {
   display: grid;
 }
 
-.recent-link > div > a:last-of-type {
+.recent-link > div > p {
   color: #ffffffb4;
   margin-top: 10px;
 }
@@ -92,7 +93,8 @@ i > svg:hover {
 }
 
 @media only screen and (max-width: 35rem) {
-  a {
+  a,
+  p {
     font-size: 0.8em;
   }
 }

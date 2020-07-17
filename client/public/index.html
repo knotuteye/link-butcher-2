@@ -18,7 +18,8 @@
       content="A URL Shortener built with the MEVN Stack"
     />
   </head>
-  <body onload="loadParticles()">
+  <body>
+    <script async src="./js/particles.min.js"></script>
     <noscript>
       <strong
         >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
@@ -28,11 +29,5 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <script src="./js/particles.min.js"></script>
-    <script>
-      function loadParticles() {
-        particlesJS.load('overlay', './js/particles.json', () => {})
-      }
-    </script>
   </body>
 </html>
