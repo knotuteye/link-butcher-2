@@ -1,10 +1,11 @@
 <template>
-  <form class="url-input" v-on:submit.prevent="updateTuple(url)">
+  <form class="url-input" v-on:submit.prevent="standardizeURL(url)" novalidate>
     <input type="submit" aria-label="Shrink the pasted link" value="Shrink" />
     <input
       type="url"
       v-model="url"
       name="url"
+      :class="err"
       placeholder="Paste a link to shorten it"
       required
       aria-label="Paste a link here"
@@ -18,14 +19,31 @@ import { getNewLink } from '../api/calls'
 @Component
 export default class URLInput extends Vue {
   public url = ''
-  async updateTuple(url: string) {
-    if (url || url != '') {
-      const tuple = await getNewLink(url)
+  public err = ''
+  async updateTuple() {
+    if (this.url || this.url != '') {
+      const tuple = await getNewLink(this.url)
       this.$store.commit('updateNewLink', tuple)
     }
   }
-  validURL(str: string) {
-    var pattern = new RegExp(
+  standardizeURL() {
+    if (
+      !(this.url.slice(0, 7) == 'http://' || this.url.slice(0, 8) == 'https://')
+    ) {
+      this.url = `http://${this.url}`
+    }
+    if (this.validURL(this.url)) {
+      this.updateTuple()
+    } else {
+      this.err = 'error'
+      setTimeout(() => {
+        this.err = ''
+      }, 700)
+    }
+  }
+
+  validURL(str: string): boolean {
+    const pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
       '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
@@ -40,6 +58,9 @@ export default class URLInput extends Vue {
 </script>
 
 <style scoped>
+p {
+  color: white;
+}
 form {
   display: flex;
 }
@@ -72,6 +93,11 @@ input[type='url']::placeholder {
   color: #ffffffcb;
 }
 
+input[type='url'].error {
+  border-color: red;
+  animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+
 input[type='submit'] {
   background: #59c173; /* fallback for old browsers */
   background: linear-gradient(
@@ -99,6 +125,10 @@ input[type='submit']:hover ~ input[type='url'] {
   border-color: #5c26c1bd;
 }
 
+input[type='submit']:hover ~ input[type='url'].error {
+  border-color: red;
+}
+
 input[type='submit']:focus {
   background: #5c26c1c9;
   color: #ffffff;
@@ -123,6 +153,31 @@ input[type='submit']:focus {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 1rem;
+  }
+}
+
+/* animations */
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  90% {
+    transform: translateX(-8px);
   }
 }
 </style>
