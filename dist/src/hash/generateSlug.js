@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -27,50 +36,53 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateSlug = exports.optimizedSlugRoutine = void 0;
+exports.generateSlugTuple = void 0;
 var hasher = require("sha-1");
 var encoder = require("base64-url");
 var SlugTuple_1 = require("./SlugTuple");
 var database_operations_1 = require("../db/database_operations");
-function optimizedSlugRoutine(url) {
-    return new Promise(function (resolve, reject) {
-        if (!url || url == '') {
-            return null;
-        }
-        database_operations_1.getURLIfAlreadyExists(url)
-            .then(function (result) {
-            var oldSlugTuple = result || null;
-            if (result)
-                console.log('Using Previous Link');
-            resolve(oldSlugTuple);
-        })
-            .catch(function (err) { return reject(err); });
-    });
-}
-exports.optimizedSlugRoutine = optimizedSlugRoutine;
 /**
- * This generator function receives a string url and yields an 8 character slug sliced from the hashed input.
- * @param url The url to hash
+ * This generator function receives a string url and
+ * yields an 8 character slug sliced from the hashed input.
  */
-function generateSlug(url) {
-    var salt, hash, slugParent, index;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                salt = "" + url + 'a very spicy salt';
-                hash = hasher(salt);
-                slugParent = encoder.encode(hash);
-                index = 0;
-                _a.label = 1;
-            case 1:
-                if (!(index <= slugParent.length - 8)) return [3 /*break*/, 3];
-                return [4 /*yield*/, new SlugTuple_1.SlugTuple(slugParent.slice(index, index + 8), url)];
-            case 2:
-                _a.sent();
-                index++;
-                return [3 /*break*/, 1];
-            case 3: return [2 /*return*/, null];
-        }
+function generateSlugTuple(url) {
+    return __awaiter(this, void 0, void 0, function () {
+        var oldTuple, salt, hash, slugParent, index, newTuple;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, database_operations_1.getTupleIfURLAlreadyExists(url)];
+                case 1:
+                    oldTuple = _a.sent();
+                    if (oldTuple) {
+                        return [2 /*return*/, oldTuple];
+                    }
+                    salt = "" + url + 'a very spicy salt';
+                    hash = hasher(salt);
+                    slugParent = encoder.encode(hash);
+                    index = 0;
+                    _a.label = 2;
+                case 2:
+                    if (!(index <= slugParent.length - 8)) return [3 /*break*/, 4];
+                    newTuple = new SlugTuple_1.SlugTuple(slugParent.slice(index, index + 8), url);
+                    return [4 /*yield*/, database_operations_1.slugAlreadyExists(newTuple)];
+                case 3:
+                    if (_a.sent()) {
+                        index++;
+                    }
+                    else {
+                        database_operations_1.insertLink(newTuple)
+                            .then(function () {
+                            return newTuple;
+                        })
+                            .catch(function (err) {
+                            console.error('Critical: insertLink routine failed');
+                            return { err: err.message };
+                        });
+                    }
+                    return [3 /*break*/, 2];
+                case 4: return [2 /*return*/];
+            }
+        });
     });
 }
-exports.generateSlug = generateSlug;
+exports.generateSlugTuple = generateSlugTuple;

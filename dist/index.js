@@ -36,61 +36,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/** Module Imports */
 var express = require("express");
 var cors = require("cors");
 var bodyParser = require("body-parser");
+/** Local Imports */
 var database_operations_1 = require("./src/db/database_operations");
 var generateSlug_1 = require("./src/hash/generateSlug");
 var app = express();
+/** Setting Up Middleware */
 app.use(cors());
 app.use(express.static('./client/dist'));
 app.use(bodyParser.json());
-/**SLUG ENDPOINTS */
+/** API Endpoints */
 app.post('/slugs/create', function (req, res) {
-    var _this = this;
-    var _a;
-    var url = (_a = req.body.url) === null || _a === void 0 ? void 0 : _a.toString(); // Convert url to string
-    // console.log(url)
-    var slugTuple;
-    generateSlug_1.optimizedSlugRoutine(url).then(function (result) {
-        if (result) {
-            res.json({ slug: result.slug, url: result.url });
-        }
-        else {
-            var hook_1 = generateSlug_1.generateSlug(url);
-            slugTuple = hook_1.next().value;
-            // TODO: Make this recursive
-            database_operations_1.URLAlreadyExists(slugTuple)
-                .then(function (bool) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            if (!bool) return [3 /*break*/, 2];
-                            // console.log('Recursive Generation Entered')
-                            slugTuple = hook_1.next().value;
-                            return [4 /*yield*/, database_operations_1.URLAlreadyExists(slugTuple)];
-                        case 1:
-                            // console.log(slugTuple?.slug)
-                            bool = _a.sent();
-                            return [3 /*break*/, 0];
-                        case 2: return [2 /*return*/];
-                    }
-                });
-            }); })
-                .then(function () {
-                slugTuple
-                    ? database_operations_1.insertLink(slugTuple)
-                        .then(function () {
-                        res.json({ slug: slugTuple === null || slugTuple === void 0 ? void 0 : slugTuple.slug, url: slugTuple === null || slugTuple === void 0 ? void 0 : slugTuple.url });
-                    })
-                        .catch(function (err) {
-                        return res.json({ error: err || 'An error occurred. Retry' });
-                    })
-                    : res.json({ error: 'No URL Provided' });
-            });
-        }
+    return __awaiter(this, void 0, void 0, function () {
+        var url, _a, _b, _c;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
+                case 0:
+                    url = req.body.url;
+                    if (!(url && url != '')) return [3 /*break*/, 2];
+                    _c = (_b = res).json;
+                    return [4 /*yield*/, generateSlug_1.generateSlugTuple(url)];
+                case 1:
+                    _a = _c.apply(_b, [_d.sent()]);
+                    return [3 /*break*/, 3];
+                case 2:
+                    _a = res.json({ error: 'No URL Provided' });
+                    _d.label = 3;
+                case 3:
+                    _a;
+                    return [2 /*return*/];
+            }
+        });
     });
 });
+/** Fetch Recent Links */
 app.post('/slugs/all', function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, _b;
@@ -98,7 +80,7 @@ app.post('/slugs/all', function (req, res) {
             switch (_c.label) {
                 case 0:
                     _b = (_a = res).json;
-                    return [4 /*yield*/, database_operations_1.getAllTuples()];
+                    return [4 /*yield*/, database_operations_1.getRecentTuples()];
                 case 1:
                     _b.apply(_a, [_c.sent()]);
                     return [2 /*return*/];
@@ -106,14 +88,17 @@ app.post('/slugs/all', function (req, res) {
         });
     });
 });
-/**REDIRECT ENDPOINT */
+/** Redirection */
 app.get('/:slug', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var url;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, database_operations_1.getURLOfExistingSlugTuple(req.params.slug)];
+            case 0: return [4 /*yield*/, database_operations_1.getURLOfExistingSlugTuple(req.params.slug)
+                // If url was found in db, redirect else show error message
+            ];
             case 1:
                 url = _a.sent();
+                // If url was found in db, redirect else show error message
                 url
                     ? res.redirect(url)
                     : res.send("<h1> This link doesn't exist ...yet </h1>");
@@ -121,9 +106,7 @@ app.get('/:slug', function (req, res) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); });
-app.get('/', function (req, res) {
-    res.send('<h1>URL Shrink Backend</h1>');
-});
+/** Listener */
 app.listen(process.env.PORT || 5000, function () {
     console.log("URL Shortener live !");
 });

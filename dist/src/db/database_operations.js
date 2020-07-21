@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllTuples = exports.getURLOfExistingSlugTuple = exports.URLAlreadyExists = exports.getURLIfAlreadyExists = exports.insertLink = void 0;
+exports.getRecentTuples = exports.getURLOfExistingSlugTuple = exports.slugAlreadyExists = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
 var MongoDB = require("mongodb");
 var credentials = require("./credentials.json");
 var uri = "mongodb+srv://" + credentials.name + ":" + credentials.password + "@" + credentials.server + "/" + credentials.database + "?retryWrites=true&w=majority";
@@ -54,26 +54,25 @@ MongoDB.MongoClient.connect(uri, {
     .catch(function (error) { return console.error(error); });
 function insertLink(tuple) {
     return new Promise(function (resolve, reject) {
-        var payload = tuple;
         if (tuple)
-            collection.insertOne(payload, function (err) {
+            collection.insertOne(tuple, function (err) {
                 err ? reject(err) : resolve(console.log('Successful Insertion'));
             });
     });
 }
 exports.insertLink = insertLink;
-function getURLIfAlreadyExists(url) {
+function getTupleIfURLAlreadyExists(url) {
     return new Promise(function (resolve, reject) {
         collection
             .findOne({ url: url })
             .then(function (result) {
-            resolve(result || null);
+            resolve(result);
         })
             .catch(function (err) { return reject(err); });
     });
 }
-exports.getURLIfAlreadyExists = getURLIfAlreadyExists;
-function URLAlreadyExists(tuple) {
+exports.getTupleIfURLAlreadyExists = getTupleIfURLAlreadyExists;
+function slugAlreadyExists(tuple) {
     return __awaiter(this, void 0, void 0, function () {
         var results;
         return __generator(this, function (_a) {
@@ -86,7 +85,7 @@ function URLAlreadyExists(tuple) {
         });
     });
 }
-exports.URLAlreadyExists = URLAlreadyExists;
+exports.slugAlreadyExists = slugAlreadyExists;
 function getURLOfExistingSlugTuple(slug) {
     return __awaiter(this, void 0, void 0, function () {
         var skyTuple;
@@ -101,7 +100,7 @@ function getURLOfExistingSlugTuple(slug) {
     });
 }
 exports.getURLOfExistingSlugTuple = getURLOfExistingSlugTuple;
-function getAllTuples() {
+function getRecentTuples() {
     return __awaiter(this, void 0, void 0, function () {
         var cursor, results, elem;
         return __generator(this, function (_a) {
@@ -125,4 +124,4 @@ function getAllTuples() {
         });
     });
 }
-exports.getAllTuples = getAllTuples;
+exports.getRecentTuples = getRecentTuples;
