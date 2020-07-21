@@ -8,7 +8,7 @@ import {
   getRecentTuples,
   getTupleIfURLAlreadyExists,
 } from './src/db/database_operations'
-import { generateSlugTuple } from './src/hash/generateSlug'
+import generateSlugTuple from './src/hash/generateSlug'
 
 const app: express.Application = express()
 

@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     // server: 'http://localhost:5000/',
     server: window.location.href,
-    recentLinks: [{}],
+    recentLinks: new Array<any>(),
     newTuple: null,
     connectionError: false
   },

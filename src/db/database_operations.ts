@@ -8,16 +8,21 @@ const uri = `mongodb+srv://${credentials.name}:${credentials.password}@${credent
 let DB: MongoDB.Db
 let collection: MongoDB.Collection
 
-MongoDB.MongoClient.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then((client) => {
-    console.log('Connected to DB')
-    DB = client.db(credentials.database)
-    collection = DB.collection('urlMap')
+connectDB()
+
+export async function connectDB() {
+  return await MongoDB.MongoClient.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((error) => console.error(error))
+    .then((client) => {
+      console.log('Connected to DB')
+      DB = client.db(credentials.database)
+      collection = DB.collection('urlMap')
+      return collection
+    })
+    .catch((error) => console.error(error))
+}
 
 export function insertLink(tuple: SlugTuple): Promise<void> {
   return new Promise((resolve, reject) => {

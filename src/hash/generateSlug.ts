@@ -10,7 +10,7 @@ import { SlugTuple } from './SlugTuple'
  * This generator function receives a string url and
  * yields an 8 character slug sliced from the hashed input.
  */
-export async function generateSlugTuple(url: string) {
+export default async function generateSlugTuple(url: string) {
   let oldTuple = await getTupleIfURLAlreadyExists(url)
   if (oldTuple) {
     return oldTuple
