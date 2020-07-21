@@ -16,11 +16,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { getNewLink, getRecentLinks } from '../api/calls'
+import { getNewLink } from '../api/calls'
 @Component
 export default class URLInput extends Vue {
   public url = ''
   public err = ''
+
+  /**Fetch new tuple and update store */
   async updateTuple() {
     if (this.url || this.url != '') {
       const tuple = await getNewLink(this.url)
@@ -28,6 +30,7 @@ export default class URLInput extends Vue {
       this.$store.commit('addToRecentLinkStack', tuple)
     }
   }
+  /**Handle URL invalidity with animation */
   standardizeURL() {
     if (
       !(this.url.slice(0, 7) == 'http://' || this.url.slice(0, 8) == 'https://')
@@ -44,6 +47,7 @@ export default class URLInput extends Vue {
     }
   }
 
+  // Validate URL
   validURL(str: string): boolean {
     const pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol

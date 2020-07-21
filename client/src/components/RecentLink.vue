@@ -1,5 +1,5 @@
 <template>
-  <div class="recent-link">
+  <div class="recent-link" :class="bubble ? anim : ''">
     <div>
       <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
       <p class="original" :title="original">
@@ -23,16 +23,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { getRecentLinks } from '../api/calls'
 
 @Component
 export default class RecentLink extends Vue {
   @Prop() private short!: string
   @Prop() private original!: string
+  @Prop() private bubble!: boolean
 
-  originalCaption = `${this.original.slice(0, 20)}${
-    this.original.length > 20 ? '...' : ''
-  }`
+  @Watch('short') onShortChange() {
+    if (this.bubble) {
+      this.anim = ''
+      setTimeout(() => {
+        this.anim = 'jello-horizontal'
+        getRecentLinks().then(data => {
+          this.$store.commit('updateRecentLinks', data)
+        })
+      }, 0)
+    }
+  }
+
+  get originalCaption() {
+    return `${this.original.slice(0, 20)}${
+      this.original.length > 20 ? '...' : ''
+    }`
+  }
+
+  public anim = 'jello-horizontal'
 
   copyToClipboard(): void {
     const el = document.createElement('textarea')
@@ -67,6 +85,12 @@ a.short {
   justify-content: space-between;
 }
 
+#bubble.recent-link {
+  border: 0.5px solid #ffffff4f;
+  border-radius: 10px;
+  background: #0c04169c;
+}
+
 .recent-link:last-of-type {
   border-bottom: 0;
 }
@@ -86,7 +110,6 @@ a.short {
 i {
   cursor: pointer;
   align-self: center;
-  font-size: 1.5em;
   color: #ffffffa9;
 }
 i > svg {
@@ -101,6 +124,59 @@ i > svg:hover {
   a,
   p {
     font-size: 0.8em;
+  }
+}
+
+/* Animations */
+
+.jello-horizontal {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+}
+
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.flip-out-hor-top {
+  animation: flip-out-hor-top 0.45s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@keyframes flip-out-hor-top {
+  0% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(70deg);
+    opacity: 0;
   }
 }
 </style>

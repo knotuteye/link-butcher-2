@@ -5,7 +5,14 @@
         <div class="wrapper">
           <Branding name="pbid.io" subtitle="Link Shortener"></Branding>
           <URLInput />
-          <Bubble
+          <!-- <Bubble
+            v-if="newTuple"
+            :short="newTuple.slug"
+            :original="newTuple.url"
+          /> -->
+          <RecentLink
+            id="bubble"
+            :bubble="true"
             v-if="newTuple"
             :short="newTuple.slug"
             :original="newTuple.url"
