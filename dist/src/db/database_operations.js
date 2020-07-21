@@ -36,31 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLastHundredTuples = exports.getRecentTuples = exports.getTupleIfURLAlreadyExists = exports.insertLink = exports.connectDB = void 0;
+exports.getLastHundredTuples = exports.getRecentTuples = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
 var MongoDB = require("mongodb");
 var credentials = require("./credentials.json");
+var buffer_1 = require("../cache/buffer");
 var uri = "mongodb+srv://" + credentials.name + ":" + credentials.password + "@" + credentials.server + "/" + credentials.database + "?retryWrites=true&w=majority";
 var DB;
 var collection;
-function connectDB() {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            MongoDB.MongoClient.connect(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            })
-                .then(function (client) {
-                console.log('Connected to DB');
-                DB = client.db(credentials.database);
-                collection = DB.collection('urlMap');
-                return collection;
-            })
-                .catch(function (error) { return console.error(error); });
-            return [2 /*return*/];
-        });
-    });
-}
-exports.connectDB = connectDB;
+MongoDB.MongoClient.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(function (client) {
+    console.log('Connected to DB');
+    DB = client.db(credentials.database);
+    collection = DB.collection('urlMap');
+    /**Setup Cache */
+    buffer_1.prepCache();
+})
+    .then(function () { })
+    .catch(function (error) { return console.error(error); });
 function insertLink(tuple) {
     return new Promise(function (resolve, reject) {
         if (tuple)

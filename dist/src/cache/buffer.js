@@ -57,7 +57,10 @@ function prepCache() {
 }
 exports.prepCache = prepCache;
 function writeToCache(json) {
-    fs_1.writeFile('cache.json', json, function () {
+    fs_1.writeFile('src/cache/cache.json', json, function (err) {
+        if (err) {
+            throw err;
+        }
         console.log('Cache Updated');
     });
 }

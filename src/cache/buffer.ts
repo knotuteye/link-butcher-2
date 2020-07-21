@@ -1,6 +1,7 @@
 import { writeFile } from 'fs'
 import { getLastHundredTuples } from '../db/database_operations'
 import { SlugTuple } from '../hash/SlugTuple'
+import path from 'path'
 
 export async function prepCache() {
 	let jsonArr = JSON.stringify(await getLastHundredTuples())
@@ -8,7 +9,10 @@ export async function prepCache() {
 }
 
 export function writeToCache(json: string) {
-	writeFile('cache.json', json, () => {
+	writeFile('src/cache/cache.json', json, (err) => {
+		if (err) {
+			throw err
+		}
 		console.log('Cache Updated')
 	})
 }

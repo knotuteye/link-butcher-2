@@ -46,17 +46,11 @@ var bodyParser = require("body-parser");
 /** Local Imports */
 var database_operations_1 = require("./src/db/database_operations");
 var generateSlug_1 = __importDefault(require("./src/hash/generateSlug"));
-var buffer_1 = require("./src/cache/buffer");
 var app = express();
 /** Setting Up Middleware */
 app.use(cors());
 app.use(express.static('./client/dist'));
 app.use(bodyParser.json());
-/**Connecting to DB */
-database_operations_1.connectDB().then(function () {
-    /** Setting Up Cache */
-    buffer_1.prepCache();
-});
 /** API Endpoints */
 /** Create Slug */
 app.post('/slugs/create', function (req, res) {
@@ -118,5 +112,10 @@ app.get('/:slug', function (req, res) { return __awaiter(void 0, void 0, void 0,
 }); });
 /** Listener */
 app.listen(process.env.PORT || 5000, function () {
-    console.log("URL Shortener live !");
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            console.log("URL Shortener live !");
+            return [2 /*return*/];
+        });
+    });
 });

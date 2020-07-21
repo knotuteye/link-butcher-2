@@ -5,12 +5,10 @@ import bodyParser = require('body-parser')
 
 /** Local Imports */
 import {
-	getRecentTuples,
-	getTupleIfURLAlreadyExists,
-	connectDB,
+  getRecentTuples,
+  getTupleIfURLAlreadyExists
 } from './src/db/database_operations'
 import generateSlugTuple from './src/hash/generateSlug'
-import { prepCache } from './src/cache/buffer'
 
 const app: express.Application = express()
 
@@ -18,12 +16,6 @@ const app: express.Application = express()
 app.use(cors())
 app.use(express.static('./client/dist'))
 app.use(bodyParser.json())
-
-/**Connecting to DB */
-connectDB().then(() => {
-	/** Setting Up Cache */
-	prepCache()
-})
 
 /** API Endpoints */
 
@@ -51,6 +43,6 @@ app.get('/:slug', async (req, res) => {
 })
 
 /** Listener */
-app.listen(process.env.PORT || 5000, function () {
+app.listen(process.env.PORT || 5000, async function () {
 	console.log(`URL Shortener live !`)
 })

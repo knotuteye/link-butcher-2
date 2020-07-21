@@ -2,25 +2,27 @@ import MongoDB = require('mongodb')
 
 import credentials = require('./credentials.json')
 import { SlugTuple } from '../hash/SlugTuple'
+import { prepCache } from '../cache/buffer'
 
 const uri = `mongodb+srv://${credentials.name}:${credentials.password}@${credentials.server}/${credentials.database}?retryWrites=true&w=majority`
 
 let DB: MongoDB.Db
 let collection: MongoDB.Collection
 
-export async function connectDB() {
-	MongoDB.MongoClient.connect(uri, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
+MongoDB.MongoClient.connect(uri, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+})
+	.then((client) => {
+		console.log('Connected to DB')
+		DB = client.db(credentials.database)
+		collection = DB.collection('urlMap')
+  
+    /**Setup Cache */
+		prepCache()
 	})
-		.then((client) => {
-			console.log('Connected to DB')
-			DB = client.db(credentials.database)
-			collection = DB.collection('urlMap')
-			return collection
-		})
-		.catch((error) => console.error(error))
-}
+	.then(() => {})
+	.catch((error) => console.error(error))
 
 export function insertLink(tuple: SlugTuple): Promise<void> {
 	return new Promise((resolve, reject) => {
