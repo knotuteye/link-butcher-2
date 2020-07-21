@@ -6,7 +6,8 @@ import bodyParser = require('body-parser')
 /** Local Imports */
 import {
   getRecentTuples,
-  getURLOfExistingSlugTuple,
+
+  getTupleIfURLAlreadyExists
 } from './src/db/database_operations'
 import { generateSlugTuple } from './src/hash/generateSlug'
 
@@ -32,11 +33,11 @@ app.post('/slugs/all', async function (req, res) {
 
 /** Redirection */
 app.get('/:slug', async (req, res) => {
-  let url = await getURLOfExistingSlugTuple(req.params.slug)
+  let tuple = await getTupleIfURLAlreadyExists(req.params.slug)
 
   // If url was found in db, redirect else show error message
-  url
-    ? res.redirect(url)
+  tuple
+    ? res.redirect(tuple.url)
     : res.send("<h1> This link doesn't exist ...yet </h1>")
 })
 

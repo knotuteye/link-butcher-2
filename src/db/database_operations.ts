@@ -39,16 +39,6 @@ export function getTupleIfURLAlreadyExists(url: string): Promise<SlugTuple> {
   })
 }
 
-// export async function slugAlreadyExists(tuple: SlugTuple | null) {
-//   let results = await collection.findOne({ slug: tuple?.slug })
-//   return results ? true : false
-// }
-
-export async function getURLOfExistingSlugTuple(slug: string) {
-  let skyTuple = await collection.findOne({ slug: slug })
-  return skyTuple?.url || null
-}
-
 export async function getRecentTuples() {
   let cursor = await collection.find().limit(6).sort({ _id: -1 })
   let results: Array<SlugTuple> = []

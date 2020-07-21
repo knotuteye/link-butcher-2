@@ -3,7 +3,7 @@
     <div>
       <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
       <p class="original" :title="original">
-        {{ original.slice(0, 20) + '...' }}
+        {{ original.slice(0, 20) + original.length > 20 ? '...' : '' }}
       </p>
     </div>
     <i @click="copyToClipboard" title="Copy" class="copy-icon">
