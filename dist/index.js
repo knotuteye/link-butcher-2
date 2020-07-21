@@ -52,8 +52,11 @@ var app = express();
 app.use(cors());
 app.use(express.static('./client/dist'));
 app.use(bodyParser.json());
-/** Setting Up Cache */
-buffer_1.prepCache();
+/**Connecting to DB */
+database_operations_1.connectDB().then(function () {
+    /** Setting Up Cache */
+    buffer_1.prepCache();
+});
 /** API Endpoints */
 /** Create Slug */
 app.post('/slugs/create', function (req, res) {

@@ -5,11 +5,7 @@
         <div class="wrapper">
           <Branding name="pbid.io" subtitle="Link Shortener"></Branding>
           <URLInput />
-          <!-- <Bubble
-            v-if="newTuple"
-            :short="newTuple.slug"
-            :original="newTuple.url"
-          /> -->
+
           <RecentLink
             id="bubble"
             :bubble="true"
@@ -40,7 +36,6 @@ import Branding from './components/Branding.vue'
 import URLInput from './components/URLInput.vue'
 import RecentLinksBox from './components/RecentLinksBox.vue'
 import RecentLink from './components/RecentLink.vue'
-import Bubble from './components/Bubble.vue'
 import { getRecentLinks } from './api/calls'
 
 @Component({

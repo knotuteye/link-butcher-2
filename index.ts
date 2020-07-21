@@ -7,6 +7,7 @@ import bodyParser = require('body-parser')
 import {
 	getRecentTuples,
 	getTupleIfURLAlreadyExists,
+	connectDB,
 } from './src/db/database_operations'
 import generateSlugTuple from './src/hash/generateSlug'
 import { prepCache } from './src/cache/buffer'
@@ -18,8 +19,11 @@ app.use(cors())
 app.use(express.static('./client/dist'))
 app.use(bodyParser.json())
 
-/** Setting Up Cache */
-prepCache()
+/**Connecting to DB */
+connectDB().then(() => {
+	/** Setting Up Cache */
+	prepCache()
+})
 
 /** API Endpoints */
 
