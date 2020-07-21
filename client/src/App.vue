@@ -45,8 +45,7 @@ import { getRecentLinks } from './api/calls'
     Branding,
     URLInput,
     RecentLinksBox,
-    RecentLink,
-    Bubble
+    RecentLink
   }
 })
 export default class App extends Vue {
