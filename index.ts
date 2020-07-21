@@ -5,7 +5,7 @@ import bodyParser = require('body-parser')
 
 /** Local Imports */
 import {
-  getAllTuples,
+  getRecentTuples,
   getURLOfExistingSlugTuple,
 } from './src/db/database_operations'
 import { generateSlugTuple } from './src/hash/generateSlug'
@@ -27,7 +27,7 @@ app.post('/slugs/create', async function (req, res) {
 
 /** Fetch Recent Links */
 app.post('/slugs/all', async function (req, res) {
-  res.json(await getAllTuples())
+  res.json(await getRecentTuples())
 })
 
 /** Redirection */

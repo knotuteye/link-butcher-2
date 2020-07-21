@@ -49,7 +49,7 @@ export async function getURLOfExistingSlugTuple(slug: string) {
   return skyTuple?.url || null
 }
 
-export async function getAllTuples() {
+export async function getRecentTuples() {
   let cursor = await collection.find().limit(6).sort({ _id: -1 })
   let results: Array<SlugTuple> = []
   while (await cursor.hasNext()) {
