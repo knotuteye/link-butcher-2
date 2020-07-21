@@ -79,7 +79,7 @@ function generateSlugTuple(url) {
                     })];
                 case 5:
                     _a.sent();
-                    return [2 /*return*/];
+                    return [2 /*return*/, newTuple];
             }
         });
     });

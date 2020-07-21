@@ -33,4 +33,5 @@ export async function generateSlugTuple(url: string) {
   await insertLink(newTuple).catch(() => {
     console.error('Critical: insertLink routine failed')
   })
+  return newTuple
 }
