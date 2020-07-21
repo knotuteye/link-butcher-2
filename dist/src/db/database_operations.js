@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRecentTuples = exports.getURLOfExistingSlugTuple = exports.slugAlreadyExists = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
+exports.getRecentTuples = exports.getURLOfExistingSlugTuple = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
 var MongoDB = require("mongodb");
 var credentials = require("./credentials.json");
 var uri = "mongodb+srv://" + credentials.name + ":" + credentials.password + "@" + credentials.server + "/" + credentials.database + "?retryWrites=true&w=majority";
@@ -72,20 +72,10 @@ function getTupleIfURLAlreadyExists(url) {
     });
 }
 exports.getTupleIfURLAlreadyExists = getTupleIfURLAlreadyExists;
-function slugAlreadyExists(tuple) {
-    return __awaiter(this, void 0, void 0, function () {
-        var results;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, collection.findOne({ slug: tuple === null || tuple === void 0 ? void 0 : tuple.slug })];
-                case 1:
-                    results = _a.sent();
-                    return [2 /*return*/, results ? true : false];
-            }
-        });
-    });
-}
-exports.slugAlreadyExists = slugAlreadyExists;
+// export async function slugAlreadyExists(tuple: SlugTuple | null) {
+//   let results = await collection.findOne({ slug: tuple?.slug })
+//   return results ? true : false
+// }
 function getURLOfExistingSlugTuple(slug) {
     return __awaiter(this, void 0, void 0, function () {
         var skyTuple;

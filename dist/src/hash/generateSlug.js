@@ -39,8 +39,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateSlugTuple = void 0;
 var hasher = require("sha-1");
 var encoder = require("base64-url");
-var SlugTuple_1 = require("./SlugTuple");
 var database_operations_1 = require("../db/database_operations");
+var SlugTuple_1 = require("./SlugTuple");
 /**
  * This generator function receives a string url and
  * yields an 8 character slug sliced from the hashed input.
@@ -65,9 +65,9 @@ function generateSlugTuple(url) {
                 case 2:
                     if (!(index <= slugParent.length - 8)) return [3 /*break*/, 4];
                     newTuple = new SlugTuple_1.SlugTuple(slugParent.slice(index, index + 8), url);
-                    return [4 /*yield*/, database_operations_1.slugAlreadyExists(newTuple)];
+                    return [4 /*yield*/, database_operations_1.getTupleIfURLAlreadyExists(newTuple.url)];
                 case 3:
-                    if (_a.sent()) {
+                    if (!!(_a.sent())) {
                         index++;
                     }
                     else {

@@ -1,11 +1,10 @@
 import hasher = require('sha-1')
 import encoder = require('base64-url')
-import { SlugTuple } from './SlugTuple'
 import {
   getTupleIfURLAlreadyExists,
-  slugAlreadyExists,
   insertLink,
 } from '../db/database_operations'
+import { SlugTuple } from './SlugTuple'
 
 /**
  * This generator function receives a string url and
@@ -24,7 +23,7 @@ export async function generateSlugTuple(url: string) {
   let newTuple = new SlugTuple('', '')
   while (index <= slugParent.length - 8) {
     newTuple = new SlugTuple(slugParent.slice(index, index + 8), url)
-    if (await slugAlreadyExists(newTuple)) {
+    if (!!(await getTupleIfURLAlreadyExists(newTuple.url))) {
       index++
     } else {
       break

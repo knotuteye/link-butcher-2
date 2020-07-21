@@ -1,8 +1,8 @@
 export class SlugTuple {
-  constructor(slug: string, url: string | undefined) {
+  constructor(slug: string, url: string) {
     this.slug = slug
     this.url = url
   }
   public slug: string
-  public url: string | undefined
+  public url: string
 }
