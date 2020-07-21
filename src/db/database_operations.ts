@@ -19,28 +19,27 @@ MongoDB.MongoClient.connect(uri, {
   })
   .catch((error) => console.error(error))
 
-export function insertLink(tuple: SlugTuple | null): Promise<void> {
+export function insertLink(tuple: SlugTuple): Promise<void> {
   return new Promise((resolve, reject) => {
-    let payload = tuple
     if (tuple)
-      collection.insertOne(payload, (err) => {
+      collection.insertOne(tuple, (err) => {
         err ? reject(err) : resolve(console.log('Successful Insertion'))
       })
   })
 }
 
-export function getURLIfAlreadyExists(url: string): Promise<SlugTuple | null> {
+export function getTupleIfURLAlreadyExists(url: string): Promise<SlugTuple> {
   return new Promise((resolve, reject) => {
     collection
       .findOne({ url: url })
       .then((result) => {
-        resolve(result || null)
+        resolve(result)
       })
       .catch((err) => reject(err))
   })
 }
 
-export async function URLAlreadyExists(tuple: SlugTuple | null) {
+export async function slugAlreadyExists(tuple: SlugTuple | null) {
   let results = await collection.findOne({ slug: tuple?.slug })
   return results ? true : false
 }
