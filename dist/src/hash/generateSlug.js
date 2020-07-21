@@ -36,7 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateSlugTuple = void 0;
 var hasher = require("sha-1");
 var encoder = require("base64-url");
 var database_operations_1 = require("../db/database_operations");
@@ -84,4 +83,4 @@ function generateSlugTuple(url) {
         });
     });
 }
-exports.generateSlugTuple = generateSlugTuple;
+exports.default = generateSlugTuple;

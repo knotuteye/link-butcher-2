@@ -36,11 +36,15 @@ export function insertLink(tuple: SlugTuple): Promise<void> {
 export function getTupleIfURLAlreadyExists(url: string): Promise<SlugTuple> {
   return new Promise((resolve, reject) => {
     collection
-      .findOne({ url: url })
-      .then((result) => {
-        resolve(result)
+      .find({ url: url })
+      .limit(1)
+      .next((err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
       })
-      .catch((err) => reject(err))
   })
 }
 

@@ -35,6 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /** Module Imports */
 var express = require("express");
@@ -42,13 +45,14 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 /** Local Imports */
 var database_operations_1 = require("./src/db/database_operations");
-var generateSlug_1 = require("./src/hash/generateSlug");
+var generateSlug_1 = __importDefault(require("./src/hash/generateSlug"));
 var app = express();
 /** Setting Up Middleware */
 app.use(cors());
 app.use(express.static('./client/dist'));
 app.use(bodyParser.json());
 /** API Endpoints */
+/** Create Slug */
 app.post('/slugs/create', function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var url, _a, _b, _c;
@@ -58,7 +62,7 @@ app.post('/slugs/create', function (req, res) {
                     url = req.body.url;
                     if (!(url && url != '')) return [3 /*break*/, 2];
                     _c = (_b = res).json;
-                    return [4 /*yield*/, generateSlug_1.generateSlugTuple(url)];
+                    return [4 /*yield*/, generateSlug_1.default(url)];
                 case 1:
                     _a = _c.apply(_b, [_d.sent()]);
                     return [3 /*break*/, 3];
@@ -90,17 +94,17 @@ app.post('/slugs/all', function (req, res) {
 });
 /** Redirection */
 app.get('/:slug', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var url;
+    var tuple;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, database_operations_1.getURLOfExistingSlugTuple(req.params.slug)
+            case 0: return [4 /*yield*/, database_operations_1.getTupleIfURLAlreadyExists(req.params.slug)
                 // If url was found in db, redirect else show error message
             ];
             case 1:
-                url = _a.sent();
+                tuple = _a.sent();
                 // If url was found in db, redirect else show error message
-                url
-                    ? res.redirect(url)
+                tuple
+                    ? res.redirect(tuple.url)
                     : res.send("<h1> This link doesn't exist ...yet </h1>");
                 return [2 /*return*/];
         }

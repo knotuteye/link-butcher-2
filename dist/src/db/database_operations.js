@@ -36,22 +36,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRecentTuples = exports.getURLOfExistingSlugTuple = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
+exports.getRecentTuples = exports.getTupleIfURLAlreadyExists = exports.insertLink = exports.connectDB = void 0;
 var MongoDB = require("mongodb");
 var credentials = require("./credentials.json");
 var uri = "mongodb+srv://" + credentials.name + ":" + credentials.password + "@" + credentials.server + "/" + credentials.database + "?retryWrites=true&w=majority";
 var DB;
 var collection;
-MongoDB.MongoClient.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(function (client) {
-    console.log('Connected to DB');
-    DB = client.db(credentials.database);
-    collection = DB.collection('urlMap');
-})
-    .catch(function (error) { return console.error(error); });
+connectDB();
+function connectDB() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, MongoDB.MongoClient.connect(uri, {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true,
+                    })
+                        .then(function (client) {
+                        console.log('Connected to DB');
+                        DB = client.db(credentials.database);
+                        collection = DB.collection('urlMap');
+                        return collection;
+                    })
+                        .catch(function (error) { return console.error(error); })];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+exports.connectDB = connectDB;
 function insertLink(tuple) {
     return new Promise(function (resolve, reject) {
         if (tuple)
@@ -64,32 +76,19 @@ exports.insertLink = insertLink;
 function getTupleIfURLAlreadyExists(url) {
     return new Promise(function (resolve, reject) {
         collection
-            .findOne({ url: url })
-            .then(function (result) {
-            resolve(result);
-        })
-            .catch(function (err) { return reject(err); });
-    });
-}
-exports.getTupleIfURLAlreadyExists = getTupleIfURLAlreadyExists;
-// export async function slugAlreadyExists(tuple: SlugTuple | null) {
-//   let results = await collection.findOne({ slug: tuple?.slug })
-//   return results ? true : false
-// }
-function getURLOfExistingSlugTuple(slug) {
-    return __awaiter(this, void 0, void 0, function () {
-        var skyTuple;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, collection.findOne({ slug: slug })];
-                case 1:
-                    skyTuple = _a.sent();
-                    return [2 /*return*/, (skyTuple === null || skyTuple === void 0 ? void 0 : skyTuple.url) || null];
+            .find({ url: url })
+            .limit(1)
+            .next(function (err, result) {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(result);
             }
         });
     });
 }
-exports.getURLOfExistingSlugTuple = getURLOfExistingSlugTuple;
+exports.getTupleIfURLAlreadyExists = getTupleIfURLAlreadyExists;
 function getRecentTuples() {
     return __awaiter(this, void 0, void 0, function () {
         var cursor, results, elem;
