@@ -5,8 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    server: 'http://localhost:5000/',
-    // server: window.location.href,
+    // server: 'http://localhost:5000/',
+    server: window.location.href,
     recentLinks: new Array<{ slug: string; url: string }>(),
     newTuple: null,
     connectionError: false
