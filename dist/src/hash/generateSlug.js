@@ -60,6 +60,7 @@ function generateSlugTuple(url) {
                     hash = hasher(salt);
                     slugParent = encoder.encode(hash);
                     index = 0;
+                    newTuple = new SlugTuple_1.SlugTuple('', '');
                     _a.label = 2;
                 case 2:
                     if (!(index <= slugParent.length - 8)) return [3 /*break*/, 4];
@@ -70,17 +71,15 @@ function generateSlugTuple(url) {
                         index++;
                     }
                     else {
-                        database_operations_1.insertLink(newTuple)
-                            .then(function () {
-                            return newTuple;
-                        })
-                            .catch(function (err) {
-                            console.error('Critical: insertLink routine failed');
-                            return { err: err.message };
-                        });
+                        return [3 /*break*/, 4];
                     }
                     return [3 /*break*/, 2];
-                case 4: return [2 /*return*/];
+                case 4: return [4 /*yield*/, database_operations_1.insertLink(newTuple).catch(function () {
+                        console.error('Critical: insertLink routine failed');
+                    })];
+                case 5:
+                    _a.sent();
+                    return [2 /*return*/];
             }
         });
     });

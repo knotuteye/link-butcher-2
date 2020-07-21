@@ -21,20 +21,16 @@ export async function generateSlugTuple(url: string) {
   let slugParent: string = encoder.encode(hash)
 
   let index = 0
-  let newTuple: SlugTuple
+  let newTuple = new SlugTuple('', '')
   while (index <= slugParent.length - 8) {
     newTuple = new SlugTuple(slugParent.slice(index, index + 8), url)
     if (await slugAlreadyExists(newTuple)) {
       index++
     } else {
-      insertLink(newTuple)
-        .then(() => {
-          return newTuple
-        })
-        .catch((err: Error) => {
-          console.error('Critical: insertLink routine failed')
-          return { err: err.message }
-        })
+      break
     }
   }
+  await insertLink(newTuple).catch(() => {
+    console.error('Critical: insertLink routine failed')
+  })
 }
