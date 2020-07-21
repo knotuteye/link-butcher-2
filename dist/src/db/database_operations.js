@@ -36,34 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRecentTuples = exports.getTupleIfURLAlreadyExists = exports.insertLink = exports.connectDB = void 0;
+exports.getLastHundredTuples = exports.getRecentTuples = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
 var MongoDB = require("mongodb");
 var credentials = require("./credentials.json");
 var uri = "mongodb+srv://" + credentials.name + ":" + credentials.password + "@" + credentials.server + "/" + credentials.database + "?retryWrites=true&w=majority";
 var DB;
 var collection;
-connectDB();
-function connectDB() {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, MongoDB.MongoClient.connect(uri, {
-                        useNewUrlParser: true,
-                        useUnifiedTopology: true,
-                    })
-                        .then(function (client) {
-                        console.log('Connected to DB');
-                        DB = client.db(credentials.database);
-                        collection = DB.collection('urlMap');
-                        return collection;
-                    })
-                        .catch(function (error) { return console.error(error); })];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        });
-    });
-}
-exports.connectDB = connectDB;
+MongoDB.MongoClient.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(function (client) {
+    console.log('Connected to DB');
+    DB = client.db(credentials.database);
+    collection = DB.collection('urlMap');
+    return collection;
+})
+    .catch(function (error) { return console.error(error); });
 function insertLink(tuple) {
     return new Promise(function (resolve, reject) {
         if (tuple)
@@ -114,3 +103,27 @@ function getRecentTuples() {
     });
 }
 exports.getRecentTuples = getRecentTuples;
+function getLastHundredTuples() {
+    return __awaiter(this, void 0, void 0, function () {
+        var cursor, results, _a, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0: return [4 /*yield*/, collection.find().limit(100).sort({ _id: -1 })];
+                case 1:
+                    cursor = _c.sent();
+                    results = [];
+                    _c.label = 2;
+                case 2: return [4 /*yield*/, cursor.hasNext()];
+                case 3:
+                    if (!_c.sent()) return [3 /*break*/, 5];
+                    _b = (_a = results).push;
+                    return [4 /*yield*/, cursor.next()];
+                case 4:
+                    _b.apply(_a, [_c.sent()]);
+                    return [3 /*break*/, 2];
+                case 5: return [2 /*return*/, results];
+            }
+        });
+    });
+}
+exports.getLastHundredTuples = getLastHundredTuples;
