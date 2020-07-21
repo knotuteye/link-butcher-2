@@ -73,6 +73,7 @@ export default class App extends Vue {
   get recentLinks() {
     return this.$store.state.recentLinks
   }
+
   get newTuple() {
     return this.$store.state.newTuple
   }
