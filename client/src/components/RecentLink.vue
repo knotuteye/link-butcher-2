@@ -3,7 +3,7 @@
     <div>
       <a class="short" :href="short">{{ `pbid.io/${short}` }}</a>
       <p class="original" :title="original">
-        {{ original.slice(0, 20) + original.length > 20 ? '...' : '' }}
+        {{ originalCaption }}
       </p>
     </div>
     <i @click="copyToClipboard" title="Copy" class="copy-icon">
@@ -29,6 +29,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 export default class RecentLink extends Vue {
   @Prop() private short!: string
   @Prop() private original!: string
+
+  originalCaption = `${this.original.slice(0, 20)}${
+    this.original.length > 20 ? '...' : ''
+  }`
+
   copyToClipboard(): void {
     const el = document.createElement('textarea')
     el.value = `pbid.io/${this.short}`

@@ -6,8 +6,7 @@ import bodyParser = require('body-parser')
 /** Local Imports */
 import {
   getRecentTuples,
-
-  getTupleIfURLAlreadyExists
+  getTupleIfURLAlreadyExists,
 } from './src/db/database_operations'
 import { generateSlugTuple } from './src/hash/generateSlug'
 
@@ -19,6 +18,8 @@ app.use(express.static('./client/dist'))
 app.use(bodyParser.json())
 
 /** API Endpoints */
+
+/** Create Slug */
 app.post('/slugs/create', async function (req, res) {
   let url: string = req.body.url
   url && url != ''
