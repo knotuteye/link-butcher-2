@@ -11,7 +11,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Branding extends Vue {
-  @Prop() private name!: string
+  @Prop() public name!: string
 }
 </script>
 
