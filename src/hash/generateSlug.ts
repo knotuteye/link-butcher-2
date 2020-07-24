@@ -37,6 +37,12 @@ export default async function generateSlugTuple(url: string) {
 		console.table(err)
 	})
 
+	/**
+	 * Send message to user when:
+	 * i. insertion failed
+	 * ii. bday paradox
+	 */
+
 	return newTuple
 }
 

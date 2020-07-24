@@ -27,13 +27,13 @@ export function insertLink(tuple: SlugTuple): Promise<void> {
 }
 
 export async function getTupleIfURLAlreadyExists(url: string) {
-	let cursor = await collection.find({ url: url }).limit(1)
+	let cursor = await collection.find({ url }).limit(1)
 	let tuple: SlugTuple = await cursor.next()
 	return tuple
 }
 
 export async function getTupleIfSlugAlreadyExists(slug: string) {
-	let cursor = await collection.find({ slug: slug }).limit(1)
+	let cursor = await collection.find({ slug }).limit(1)
 	let tuple: SlugTuple = await cursor.next()
 	return tuple
 }
@@ -43,7 +43,6 @@ export async function getRecentTuples() {
 	let results: Array<SlugTuple> = []
 	while (await cursor.hasNext()) {
 		let elem = await cursor.next()
-		delete elem._id
 		results.push(elem)
 	}
 	return results

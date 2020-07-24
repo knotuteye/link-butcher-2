@@ -6,7 +6,6 @@ import bodyParser = require('body-parser')
 /** Local Imports */
 import {
 	getRecentTuples,
-	getTupleIfURLAlreadyExists,
 	getTupleIfSlugAlreadyExists,
 } from './src/db/database_operations'
 import generateSlugTuple from './src/hash/generateSlug'
@@ -23,24 +22,25 @@ app.use(bodyParser.json())
 /** Create Slug */
 app.post('/slugs/create', async function (req, res) {
 	let url: string = req.body.url
-	url && url != ''
+	url
 		? res.json(await generateSlugTuple(url))
-		: res.json({ error: 'No URL Provided' })
+		: // : res.json({ error: 'No URL Provided' })
+		  res.sendStatus(400).send('No URL Provided')
 })
 
 /** Fetch Recent Links */
-app.post('/slugs/all', async function (req, res) {
+app.get('/slugs/all', async function (req, res) {
 	res.json(await getRecentTuples())
 })
 
 /** Redirection */
 app.get('/:slug', async (req, res) => {
 	let tuple = await getTupleIfSlugAlreadyExists(req.params.slug)
-	
+
 	// If url was found in db, redirect else show error message
 	tuple
 		? res.redirect(tuple.url)
-		: res.send("<h1> This link doesn't exist ...yet </h1>")
+		: res.sendStatus(404).send("<h1> This link doesn't exist ...yet </h1>")
 })
 
 /** Listener */
