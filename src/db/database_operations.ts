@@ -26,19 +26,16 @@ export function insertLink(tuple: SlugTuple): Promise<void> {
 	})
 }
 
-export function getTupleIfURLAlreadyExists(url: string): Promise<SlugTuple> {
-	return new Promise((resolve, reject) => {
-		collection
-			.find({ url: url })
-			.limit(1)
-			.next((err, result) => {
-				if (err) {
-					reject(err)
-				} else {
-					resolve(result)
-				}
-			})
-	})
+export async function getTupleIfURLAlreadyExists(url: string) {
+	let cursor = await collection.find({ url: url }).limit(1)
+	let tuple: SlugTuple = await cursor.next()
+	return tuple
+}
+
+export async function getTupleIfSlugAlreadyExists(slug: string) {
+	let cursor = await collection.find({ slug: slug }).limit(1)
+	let tuple: SlugTuple = await cursor.next()
+	return tuple
 }
 
 export async function getRecentTuples() {
