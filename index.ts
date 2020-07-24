@@ -36,8 +36,7 @@ app.post('/slugs/all', async function (req, res) {
 /** Redirection */
 app.get('/:slug', async (req, res) => {
 	let tuple = await getTupleIfSlugAlreadyExists(req.params.slug)
-	console.table(tuple)
-
+	
 	// If url was found in db, redirect else show error message
 	tuple
 		? res.redirect(tuple.url)
