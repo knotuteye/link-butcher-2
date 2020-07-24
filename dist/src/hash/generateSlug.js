@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sliceTillUnique = exports.generateEncodedHash = void 0;
 var hasher = require("sha-1");
 var encoder = require("base64-url");
 var database_operations_1 = require("../db/database_operations");
@@ -46,37 +47,37 @@ var SlugTuple_1 = require("./SlugTuple");
  */
 function generateSlugTuple(url) {
     return __awaiter(this, void 0, void 0, function () {
-        var oldTuple, salt, hash, slugParent, index, newTuple;
+        var oldTuple, slugParent, generator, slug, newTuple;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, database_operations_1.getTupleIfURLAlreadyExists(url)];
                 case 1:
                     oldTuple = _a.sent();
-                    if (oldTuple) {
-                        return [2 /*return*/, oldTuple];
-                    }
-                    salt = "" + url + 'a very spicy salt';
-                    hash = hasher(salt);
-                    slugParent = encoder.encode(hash);
-                    index = 0;
-                    newTuple = new SlugTuple_1.SlugTuple('', '');
+                    if (oldTuple)
+                        return [2 /*return*/, oldTuple
+                            // Else Create a new SlugTuple
+                        ];
+                    slugParent = generateEncodedHash(url);
+                    generator = sliceTillUnique(slugParent);
+                    slug = '';
                     _a.label = 2;
                 case 2:
-                    if (!(index <= slugParent.length - 8)) return [3 /*break*/, 4];
-                    newTuple = new SlugTuple_1.SlugTuple(slugParent.slice(index, index + 8), url);
-                    return [4 /*yield*/, database_operations_1.getTupleIfURLAlreadyExists(newTuple.url)];
-                case 3:
-                    if (!!(_a.sent())) {
-                        index++;
-                    }
-                    else {
-                        return [3 /*break*/, 4];
-                    }
-                    return [3 /*break*/, 2];
-                case 4: return [4 /*yield*/, database_operations_1.insertLink(newTuple).catch(function () {
-                        console.error('Critical: insertLink routine failed');
-                    })];
+                    slug = generator.next().value;
+                    _a.label = 3;
+                case 3: return [4 /*yield*/, database_operations_1.getTupleIfURLAlreadyExists(url)];
+                case 4:
+                    if (_a.sent()) return [3 /*break*/, 2];
+                    _a.label = 5;
                 case 5:
+                    newTuple = new SlugTuple_1.SlugTuple(slug, url);
+                    // Insert new SlugTuple into database
+                    return [4 /*yield*/, database_operations_1.insertLink(newTuple).catch(function (err) {
+                            // Error Handling
+                            console.error('Critical: insertLink routine failed');
+                            console.table(err);
+                        })];
+                case 6:
+                    // Insert new SlugTuple into database
                     _a.sent();
                     return [2 /*return*/, newTuple];
             }
@@ -84,3 +85,43 @@ function generateSlugTuple(url) {
     });
 }
 exports.default = generateSlugTuple;
+/**
+ * This function takes a string url input and returns the
+ * base64 encoding of its sha-1 hash.
+ * @param url The url to hash and encode
+ */
+function generateEncodedHash(url) {
+    var salt = "" + url + 'a very spicy salt';
+    var hash = hasher(salt);
+    var slugParent = encoder.encode(hash);
+    return slugParent;
+}
+exports.generateEncodedHash = generateEncodedHash;
+/**
+ * This generator function takes a long string input and yields
+ * 8-character segments from it, beginning from index 0.
+ * @param slugParent The string to slice
+ */
+function sliceTillUnique(slugParent) {
+    var i;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                i = 0;
+                _a.label = 1;
+            case 1:
+                if (!(i <= slugParent.length - 8)) return [3 /*break*/, 4];
+                return [4 /*yield*/, slugParent.slice(i, i + 8)];
+            case 2:
+                _a.sent();
+                _a.label = 3;
+            case 3:
+                i++;
+                return [3 /*break*/, 1];
+            case 4:
+                console.error('Birthday Paradox fulfilled');
+                return [2 /*return*/, ''];
+        }
+    });
+}
+exports.sliceTillUnique = sliceTillUnique;

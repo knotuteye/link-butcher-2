@@ -97,10 +97,11 @@ app.get('/:slug', function (req, res) { return __awaiter(void 0, void 0, void 0,
     var tuple;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, database_operations_1.getTupleIfSlugAlreadyExists(req.params.slug)];
+            case 0: return [4 /*yield*/, database_operations_1.getTupleIfSlugAlreadyExists(req.params.slug)
+                // If url was found in db, redirect else show error message
+            ];
             case 1:
                 tuple = _a.sent();
-                console.table(tuple);
                 // If url was found in db, redirect else show error message
                 tuple
                     ? res.redirect(tuple.url)
