@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecentLink.vue renders as designed 1`] = `
+<form
+  class="url-input"
+  novalidate="novalidate"
+>
+  <input
+    aria-label="Shrink the pasted link"
+    type="submit"
+    value="Shrink"
+  />
+   
+  <input
+    aria-label="Paste a link here"
+    class=""
+    name="url"
+    placeholder="Paste a link to shorten it"
+    required="required"
+    spellcheck="false"
+    type="url"
+  />
+</form>
+`;

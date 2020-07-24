@@ -6,10 +6,23 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test:unit": "jest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      ".*\\.(vue)$": "vue-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testURL": "http://localhost/"
   },
   "dependencies": {
-    "@types/jest": "^26.0.7",
     "@vue/cli-plugin-unit-jest": "^4.4.6",
     "@vue/test-utils": "^1.0.3",
     "vue": "^2.6.11",
@@ -18,6 +31,10 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.7",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
@@ -26,18 +43,16 @@
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "babel-jest": "^26.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^6.2.2",
     "jest": "^26.1.0",
     "jest-serializer-vue": "^2.0.2",
     "prettier": "^1.19.1",
+    "ts-jest": "^26.1.3",
     "typescript": "~3.9.3",
+    "vue-jest": "^3.0.6",
     "vue-template-compiler": "^2.6.11"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ]
   }
 }

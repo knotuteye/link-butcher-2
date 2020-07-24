@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorOverlay.vue is rendered as designed 1`] = `
+<div
+  class="overlay"
+  id="overlay"
+/>
+`;

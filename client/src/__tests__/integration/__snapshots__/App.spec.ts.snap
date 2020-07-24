@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App.vue is integrated as designed 1`] = `
+<div
+  id="app"
+>
+  <div
+    class="background"
+  >
+    <div
+      class="overlay"
+      id="overlay"
+    >
+      <div
+        class="wrapper"
+      >
+        <div
+          class="brand slide-in-top"
+          subtitle="Link Shortener"
+        >
+          <h1
+            class="masthead"
+          >
+            
+    pbid.io
+  
+          </h1>
+        </div>
+         
+        <form
+          class="url-input"
+          novalidate="novalidate"
+        >
+          <input
+            aria-label="Shrink the pasted link"
+            type="submit"
+            value="Shrink"
+          />
+           
+          <input
+            aria-label="Paste a link here"
+            class=""
+            name="url"
+            placeholder="Paste a link to shorten it"
+            required="required"
+            spellcheck="false"
+            type="url"
+          />
+        </form>
+         
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
