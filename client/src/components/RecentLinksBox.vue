@@ -1,5 +1,9 @@
 <template>
-  <div class="recent scale-in-ver-center">
+  <div
+    class="recent scale-in-ver-center"
+    v-infinite-scroll="loadMore"
+    infinite-scroll-distance="5"
+  >
     <h3>Recent Links</h3>
     <div class="box"><slot></slot></div>
   </div>
@@ -8,8 +12,18 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
+import { getRecentLinks } from '../api/calls'
+
 @Component
-export default class ImageBackground extends Vue {}
+export default class ImageBackground extends Vue {
+  loadMore() {
+    console.log('Fire')
+
+    getRecentLinks(
+      this.$store.state.recentLinks[this.$store.state.recentLinks.length - 1]
+    )
+  }
+}
 </script>
 
 <style scoped>

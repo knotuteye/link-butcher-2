@@ -2,8 +2,8 @@ import store from '../store'
 
 const server = store.state.server
 
-export async function getRecentLinks() {
-  return await fetch(`${server}slugs/all`, {
+export async function getRecentLinks(_id = '') {
+  return await fetch(`${server}slugs/all?id=${_id}`, {
     method: 'GET'
   }).then(results => results.json())
 }

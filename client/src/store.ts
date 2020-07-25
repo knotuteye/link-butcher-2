@@ -5,15 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // server: 'http://localhost:5000/',
-    server: window.location.href,
+    server: 'http://localhost:5000/',
+    // server: window.location.href,
     recentLinks: new Array<{ slug: string; url: string }>(),
     newTuple: null,
     connectionError: false
   },
   mutations: {
-    updateRecentLinks(state, arr) {
-      state.recentLinks = arr
+    updateRecentLinks(state, arr: Array<{ slug: string; url: string }>) {
+      state.recentLinks.push(...arr)
     },
 
     addToRecentLinkStack(state, tuple: { slug: string; url: string }) {
