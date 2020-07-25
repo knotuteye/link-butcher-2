@@ -7,5 +7,5 @@ module.exports = {
 	transform: {
 		'^.+\\.(ts|tsx)$': 'ts-jest',
 	},
-	modulePaths: ['<rootDir>/src/'],
+	testPathIgnorePatterns: ['<rootDir>/client/']
 }

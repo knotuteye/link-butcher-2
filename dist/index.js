@@ -60,14 +60,14 @@ app.post('/slugs/create', function (req, res) {
             switch (_d.label) {
                 case 0:
                     url = req.body.url;
-                    if (!(url && url != '')) return [3 /*break*/, 2];
+                    if (!url) return [3 /*break*/, 2];
                     _c = (_b = res).json;
                     return [4 /*yield*/, generateSlug_1.default(url)];
                 case 1:
                     _a = _c.apply(_b, [_d.sent()]);
                     return [3 /*break*/, 3];
                 case 2:
-                    _a = res.json({ error: 'No URL Provided' });
+                    _a = res.sendStatus(400).send('No URL Provided');
                     _d.label = 3;
                 case 3:
                     _a;
@@ -77,7 +77,7 @@ app.post('/slugs/create', function (req, res) {
     });
 });
 /** Fetch Recent Links */
-app.post('/slugs/all', function (req, res) {
+app.get('/slugs/all', function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, _b;
         return __generator(this, function (_c) {
@@ -105,7 +105,7 @@ app.get('/:slug', function (req, res) { return __awaiter(void 0, void 0, void 0,
                 // If url was found in db, redirect else show error message
                 tuple
                     ? res.redirect(tuple.url)
-                    : res.send("<h1> This link doesn't exist ...yet </h1>");
+                    : res.sendStatus(404).send("<h1> This link doesn't exist ...yet </h1>");
                 return [2 /*return*/];
         }
     });

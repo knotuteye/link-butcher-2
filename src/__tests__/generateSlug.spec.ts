@@ -6,4 +6,5 @@ describe('generateSlug.ts', () => {
 			'YWZmOGFiMjY5NWY4MzYwMWQ5ZTRkOGIxZGE5OWE5NzdlM2Q2NzJkMA'
 		)
 	})
+
 })

@@ -93,12 +93,18 @@ function getTupleIfSlugAlreadyExists(slug) {
     });
 }
 exports.getTupleIfSlugAlreadyExists = getTupleIfSlugAlreadyExists;
-function getRecentTuples() {
+function getRecentTuples(_id) {
+    if (_id === void 0) { _id = 0; }
     return __awaiter(this, void 0, void 0, function () {
         var cursor, results, elem;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, collection.find().limit(6).sort({ _id: -1 })];
+                case 0: return [4 /*yield*/, collection
+                        .find({
+                        _id: { $gte: new MongoDB.ObjectID(_id) },
+                    })
+                        .limit(10)
+                        .sort({ _id: -1 })];
                 case 1:
                     cursor = _a.sent();
                     results = [];
@@ -109,7 +115,6 @@ function getRecentTuples() {
                     return [4 /*yield*/, cursor.next()];
                 case 4:
                     elem = _a.sent();
-                    delete elem._id;
                     results.push(elem);
                     return [3 /*break*/, 2];
                 case 5: return [2 /*return*/, results];

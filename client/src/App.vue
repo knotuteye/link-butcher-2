@@ -13,7 +13,7 @@
             :short="newTuple.slug"
             :original="newTuple.url"
           />
-          <RecentLinksBox v-if="recentLinks.length != 0">
+          <RecentLinksBox v-if="recentLinks.length">
             <RecentLink
               v-for="obj in recentLinks"
               :key="obj.slug"

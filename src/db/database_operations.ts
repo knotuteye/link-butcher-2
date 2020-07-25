@@ -38,8 +38,13 @@ export async function getTupleIfSlugAlreadyExists(slug: string) {
 	return tuple
 }
 
-export async function getRecentTuples() {
-	let cursor = await collection.find().limit(6).sort({ _id: -1 })
+export async function getRecentTuples(_id = 0) {
+	let cursor = await collection
+		.find({
+			_id: { $gte: new MongoDB.ObjectID(_id) },
+		})
+		.limit(10)
+		.sort({ _id: -1 })
 	let results: Array<SlugTuple> = []
 	while (await cursor.hasNext()) {
 		let elem = await cursor.next()

@@ -75,10 +75,21 @@ function generateSlugTuple(url) {
                             // Error Handling
                             console.error('Critical: insertLink routine failed');
                             console.table(err);
-                        })];
+                        })
+                        /**
+                         * Send message to user when:
+                         * i. insertion failed
+                         * ii. bday paradox
+                         */
+                    ];
                 case 6:
                     // Insert new SlugTuple into database
                     _a.sent();
+                    /**
+                     * Send message to user when:
+                     * i. insertion failed
+                     * ii. bday paradox
+                     */
                     return [2 /*return*/, newTuple];
             }
         });

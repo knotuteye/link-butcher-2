@@ -24,7 +24,7 @@ export default class URLInput extends Vue {
 
   /**Fetch new tuple and update store */
   async updateTuple() {
-    if (this.url || this.url != '') {
+    if (this.url) {
       const tuple = await getNewLink(this.url)
       this.$store.commit('updateNewLink', tuple)
       this.$store.commit('addToRecentLinkStack', tuple)
@@ -58,7 +58,7 @@ export default class URLInput extends Vue {
         '(\\#[-a-z\\d_]*)?$',
       'i'
     ) // fragment locator
-    return !!pattern.test(str)
+    return pattern.test(str)
   }
 }
 </script>
