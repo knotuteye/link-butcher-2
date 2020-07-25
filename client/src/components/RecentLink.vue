@@ -38,7 +38,7 @@ export default class RecentLink extends Vue {
       setTimeout(() => {
         this.anim = 'jello-horizontal'
         getRecentLinks().then(data => {
-          this.$store.commit('updateRecentLinks', data)
+          this.$store.commit('updateRecentLinks', data[data.length - 1])
         })
       }, 0)
     }

@@ -16,7 +16,7 @@
           <RecentLinksBox v-if="recentLinks.length">
             <RecentLink
               v-for="obj in recentLinks"
-              :key="obj.slug"
+              :key="obj._id"
               :short="obj.slug"
               :original="obj.url"
             >

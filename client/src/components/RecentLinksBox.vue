@@ -1,27 +1,35 @@
 <template>
-  <div
-    class="recent scale-in-ver-center"
-    v-infinite-scroll="loadMore"
-    infinite-scroll-distance="5"
-  >
+  <div class="recent scale-in-ver-center">
     <h3>Recent Links</h3>
-    <div class="box"><slot></slot></div>
+    <div class="box" @scroll="loadMore"><slot></slot></div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
 import { getRecentLinks } from '../api/calls'
 
 @Component
-export default class ImageBackground extends Vue {
+export default class RecentLinksBox extends Vue {
   loadMore() {
-    console.log('Fire')
+    const box = this.$el.querySelector('.box') as HTMLElement
+    const lastRecentLink = box.lastElementChild as HTMLElement
 
-    getRecentLinks(
-      this.$store.state.recentLinks[this.$store.state.recentLinks.length - 1]
-    )
+    // console.log(lastRecentLink)
+
+    if (box.scrollTop > lastRecentLink.offsetTop - 300) {
+      // console.log(box.scrollHeight - box.scrollTop)
+
+      setTimeout(async () => {
+        const addLinks = await getRecentLinks(
+          this.$store.state.recentLinks[
+            this.$store.state.recentLinks.length - 1
+          ]._id
+        )
+        this.$store.commit('updateRecentLinks', addLinks)
+      }, 300)
+    }
+    console.log(box.scrollTop, box.scrollHeight, lastRecentLink.offsetTop)
   }
 }
 </script>
