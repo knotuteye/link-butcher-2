@@ -4,7 +4,7 @@ const server = store.state.server
 
 export async function getRecentLinks() {
   return await fetch(`${server}slugs/all`, {
-    method: 'POST'
+    method: 'GET'
   }).then(results => results.json())
 }
 

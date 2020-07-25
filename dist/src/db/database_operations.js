@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLastHundredTuples = exports.getRecentTuples = exports.getTupleIfSlugAlreadyExists = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
+exports.getRecentTuples = exports.getTupleIfSlugAlreadyExists = exports.getTupleIfURLAlreadyExists = exports.insertLink = void 0;
 var MongoDB = require("mongodb");
 var credentials = require("./credentials.json");
 var uri = "mongodb+srv://" + credentials.name + ":" + credentials.password + "@" + credentials.server + "/" + credentials.database + "?retryWrites=true&w=majority";
@@ -93,18 +93,18 @@ function getTupleIfSlugAlreadyExists(slug) {
     });
 }
 exports.getTupleIfSlugAlreadyExists = getTupleIfSlugAlreadyExists;
-function getRecentTuples(_id) {
-    if (_id === void 0) { _id = 0; }
+function getRecentTuples(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var cursor, results, elem;
+        var query, cursor, results, elem;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, collection
-                        .find({
-                        _id: { $gte: new MongoDB.ObjectID(_id) },
-                    })
-                        .limit(10)
-                        .sort({ _id: -1 })];
+                case 0:
+                    query = id
+                        ? {
+                            _id: { $lt: new MongoDB.ObjectID(id) },
+                        }
+                        : undefined;
+                    return [4 /*yield*/, collection.find(query).limit(10).sort({ _id: -1 })];
                 case 1:
                     cursor = _a.sent();
                     results = [];
@@ -123,27 +123,3 @@ function getRecentTuples(_id) {
     });
 }
 exports.getRecentTuples = getRecentTuples;
-function getLastHundredTuples() {
-    return __awaiter(this, void 0, void 0, function () {
-        var cursor, results, _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0: return [4 /*yield*/, collection.find().limit(100).sort({ _id: -1 })];
-                case 1:
-                    cursor = _c.sent();
-                    results = [];
-                    _c.label = 2;
-                case 2: return [4 /*yield*/, cursor.hasNext()];
-                case 3:
-                    if (!_c.sent()) return [3 /*break*/, 5];
-                    _b = (_a = results).push;
-                    return [4 /*yield*/, cursor.next()];
-                case 4:
-                    _b.apply(_a, [_c.sent()]);
-                    return [3 /*break*/, 2];
-                case 5: return [2 /*return*/, results];
-            }
-        });
-    });
-}
-exports.getLastHundredTuples = getLastHundredTuples;

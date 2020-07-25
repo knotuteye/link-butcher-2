@@ -30,7 +30,7 @@ app.post('/slugs/create', async function (req, res) {
 
 /** Fetch Recent Links */
 app.get('/slugs/all', async function (req, res) {
-	res.json(await getRecentTuples())
+	res.json(await getRecentTuples(req.query.id as string))
 })
 
 /** Redirection */

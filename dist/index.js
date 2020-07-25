@@ -84,7 +84,7 @@ app.get('/slugs/all', function (req, res) {
             switch (_c.label) {
                 case 0:
                     _b = (_a = res).json;
-                    return [4 /*yield*/, database_operations_1.getRecentTuples()];
+                    return [4 /*yield*/, database_operations_1.getRecentTuples(req.query.id)];
                 case 1:
                     _b.apply(_a, [_c.sent()]);
                     return [2 /*return*/];
