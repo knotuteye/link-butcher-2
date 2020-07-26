@@ -15,11 +15,7 @@ export default class RecentLinksBox extends Vue {
     const box = this.$el.querySelector('.box') as HTMLElement
     const lastRecentLink = box.lastElementChild as HTMLElement
 
-    // console.log(lastRecentLink)
-
     if (box.scrollTop > lastRecentLink.offsetTop - 300) {
-      // console.log(box.scrollHeight - box.scrollTop)
-
       setTimeout(async () => {
         const addLinks = await getRecentLinks(
           this.$store.state.recentLinks[
@@ -29,7 +25,6 @@ export default class RecentLinksBox extends Vue {
         this.$store.commit('updateRecentLinks', addLinks)
       }, 300)
     }
-    console.log(box.scrollTop, box.scrollHeight, lastRecentLink.offsetTop)
   }
 }
 </script>

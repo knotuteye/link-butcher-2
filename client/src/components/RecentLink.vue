@@ -6,7 +6,8 @@
         {{ originalCaption }}
       </p>
     </div>
-    <i @click="copyToClipboard" title="Copy" class="copy-icon">
+    <p class="copied" v-show="copied">Copied!</p>
+    <i @click="copyToClipboard" title="Copy" class="copy-icon" v-if="!copied">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -44,6 +45,8 @@ export default class RecentLink extends Vue {
     }
   }
 
+  public copied = false
+
   get originalCaption() {
     return `${this.original.slice(0, 20)}${
       this.original.length > 20 ? '...' : ''
@@ -52,14 +55,17 @@ export default class RecentLink extends Vue {
 
   public anim = 'jello-horizontal'
 
-  copyToClipboard(): void {
+  copyToClipboard() {
     const el = document.createElement('textarea')
     el.value = `pbid.io/${this.short}`
     document.body.appendChild(el)
     el.select()
     document.execCommand('copy')
     document.body.removeChild(el)
-    alert('Copied!')
+    this.copied = true
+    setTimeout(() => {
+      this.copied = false
+    }, 1000)
   }
 }
 </script>
@@ -99,12 +105,17 @@ a.short {
   background-color: #ffffff1c;
 }
 :last-of-type .recent-link > div {
+  flex: 1;
   display: grid;
 }
 
 .recent-link > div > p {
   color: #ffffffb4;
   margin-top: 10px;
+}
+
+p.copied {
+  align-self: center;
 }
 
 i {
@@ -177,6 +188,33 @@ i > svg:hover {
   100% {
     transform: rotateX(70deg);
     opacity: 0;
+  }
+}
+
+.wobble-hor-bottom {
+  animation: wobble-hor-bottom 0.8s both;
+}
+
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
   }
 }
 </style>
