@@ -1,7 +1,7 @@
 <template>
   <div class="recent scale-in-ver-center">
     <h3>Recent Links</h3>
-    <div class="box" @scroll="loadMore"><slot></slot></div>
+    <div class="box" @scroll="debouncedInfiniteScroll"><slot></slot></div>
   </div>
 </template>
 
@@ -29,11 +29,10 @@ export default class RecentLinksBox extends Vue {
     }
   }
 
-  debounce() {
+  debouncedInfiniteScroll() {
     if (this.timeout) {
       window.cancelAnimationFrame(this.timeout)
     }
-
     // Setup the new requestAnimationFrame()
     this.timeout = window.requestAnimationFrame(this.loadMore)
   }
