@@ -19,7 +19,7 @@
   "scripts": {
     "tsc": "tsc",
     "start": "node dist/index.js",
-    "fancy": "yarn tsc && cd client && yarn build",
+    "setup": "yarn tsc && cd client && yarn build",
     "test": "jest"
   },
   "devDependencies": {

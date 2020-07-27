@@ -1,44 +1,40 @@
-<h1 align="center">URL Shortener Backend</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://gitlab.com/geek-squad/concepts/url-shortener" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-</p>
+# URL Shortener
 
-> Express server for the URL Shortener project
+![version](https://img.shields.io/static/v1?label=version&message=1.0.0&color=important&style=for-the-badge)
+![runtime](https://img.shields.io/static/v1?label=&message=TypeScript&color=blue&style=for-the-badge&logo=TypeScript)
 
-### ✨ [Demo](www.fb.com)
+![database](https://img.shields.io/static/v1?label=&message=MongoDB&color=black&style=for-the-badge&logo=mongodb) ![backend](https://img.shields.io/static/v1?label=&message=Express&color=purple&style=for-the-badge&logo=Node.js) ![frontend](https://img.shields.io/static/v1?label=&message=Vue&color=darkgreen&style=for-the-badge&logo=Vue.js) ![runtime](https://img.shields.io/static/v1?label=&message=Node.JS&color=success&style=for-the-badge&logo=Node.js)
 
-## Install
+> A URL minifier built on the MEVN stack in TypeScript
+
+Find it live here: [link-butcher-2.herokuapp.com](http://link-butcher-2.herokuapp.com)
+
+## Installation
+
+### Prerequisites
+
+- Yarn
 
 ```sh
-yarn install
+> npm install -g yarn
+```
+
+### Procedure
+
+> Enter the following in a terminal.
+
+```sh
+> yarn install
+
+> yarn setup
 ```
 
 ## Usage
 
-```sh
-yarn run start
-```
-
-## Run tests
+> Enter the following in a terminal.
 
 ```sh
-yarn run test
+> yarn start
 ```
 
-## Author
-
-👤 **Asqii - Kevin Otuteye**
-
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+The application will be live on [localhost](http://localhost:5000) or the designated url.
