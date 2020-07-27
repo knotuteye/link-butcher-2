@@ -104,7 +104,7 @@ function getRecentTuples(id) {
                             _id: { $lt: new MongoDB.ObjectID(id) },
                         }
                         : undefined;
-                    return [4 /*yield*/, collection.find(query).limit(10).sort({ _id: -1 })];
+                    return [4 /*yield*/, collection.find(query).limit(5).sort({ _id: -1 })];
                 case 1:
                     cursor = _a.sent();
                     results = [];

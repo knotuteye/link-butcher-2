@@ -12,20 +12,25 @@ import { getRecentLinks } from '../api/calls'
 @Component
 export default class RecentLinksBox extends Vue {
   public timeout!: number
+  public finished = false
 
-  loadMore() {
+  async loadMore() {
     const box = this.$el.querySelector('.box') as HTMLElement
     const lastRecentLink = box.lastElementChild as HTMLElement
 
     if (box.scrollTop > lastRecentLink.offsetTop - 300) {
-      setTimeout(async () => {
+      if (!this.finished) {
         const addLinks = await getRecentLinks(
           this.$store.state.recentLinks[
             this.$store.state.recentLinks.length - 1
           ]._id
         )
+        this.finished = addLinks.length == 0 ? true : false
+        if (this.finished) {
+          console.log('fini')
+        }
         this.$store.commit('updateRecentLinks', addLinks)
-      }, 300)
+      }
     }
   }
 

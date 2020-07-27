@@ -44,7 +44,7 @@ export async function getRecentTuples(id: string) {
 				_id: { $lt: new MongoDB.ObjectID(id) },
 		  }
 		: undefined
-	let cursor = await collection.find(query).limit(10).sort({ _id: -1 })
+	let cursor = await collection.find(query).limit(5).sort({ _id: -1 })
 	let results: Array<SlugTuple> = []
 	while (await cursor.hasNext()) {
 		let elem = await cursor.next()
