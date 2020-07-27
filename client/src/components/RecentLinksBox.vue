@@ -26,9 +26,7 @@ export default class RecentLinksBox extends Vue {
           ]._id
         )
         this.finished = addLinks.length == 0 ? true : false
-        if (this.finished) {
-          console.log('fini')
-        }
+
         this.$store.commit('updateRecentLinks', addLinks)
       }
     }
