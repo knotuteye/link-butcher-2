@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SlugTuple = void 0;
 var SlugTuple = /** @class */ (function () {
     function SlugTuple(slug, url) {
+        this.error = '';
         this.slug = slug;
         this.url = url;
     }

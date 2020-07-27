@@ -35,6 +35,8 @@ export default async function generateSlugTuple(url: string) {
 		// Error Handling
 		console.error('Critical: insertLink routine failed')
 		console.table(err)
+		newTuple['error'] =
+			'Internal Server Error. Database Error. Discard Tuple'
 	})
 
 	/**

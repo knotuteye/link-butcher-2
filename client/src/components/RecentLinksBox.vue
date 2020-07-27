@@ -11,6 +11,8 @@ import { getRecentLinks } from '../api/calls'
 
 @Component
 export default class RecentLinksBox extends Vue {
+  public timeout!: number
+
   loadMore() {
     const box = this.$el.querySelector('.box') as HTMLElement
     const lastRecentLink = box.lastElementChild as HTMLElement
@@ -25,6 +27,15 @@ export default class RecentLinksBox extends Vue {
         this.$store.commit('updateRecentLinks', addLinks)
       }, 300)
     }
+  }
+
+  debounce() {
+    if (this.timeout) {
+      window.cancelAnimationFrame(this.timeout)
+    }
+
+    // Setup the new requestAnimationFrame()
+    this.timeout = window.requestAnimationFrame(this.loadMore)
   }
 }
 </script>

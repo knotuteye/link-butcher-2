@@ -75,6 +75,8 @@ function generateSlugTuple(url) {
                             // Error Handling
                             console.error('Critical: insertLink routine failed');
                             console.table(err);
+                            newTuple['error'] =
+                                'Internal Server Error. Database Error. Discard Tuple';
                         })
                         /**
                          * Send message to user when:
